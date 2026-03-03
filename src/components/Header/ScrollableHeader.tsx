@@ -10,11 +10,11 @@ const ScrollableHeader = () => {
   const contactWhatsApp = '00972599043747'
   return (
     <div
-      className="hidden lg:block  w-full py-2 "
+      className="hidden border-b-[0.5px] border-muted  lg:block  w-full py-2 "
       lang={i18n.language}
       dir="ltr"
     >
-      <div className="max-w-[1536px] mx-auto flex items-start justify-between px-4  ">
+      <div className="page-wrap max-w-[1536px] mx-auto flex items-center justify-between px-4  ">
         <div className="flex items-start gap-2">
           <LanguageSwitcher />
           <ThemeToggle />
