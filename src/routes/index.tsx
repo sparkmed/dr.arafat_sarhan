@@ -11,17 +11,19 @@ function App() {
   const { t, i18n } = useTranslation()
 
   return (
-    <main className="page-wrap px-4 pb-8 pt-14">
+    <>
       <Header />
-      <h1>Status: {message ?? 'Loading...'}</h1>
-      <h1>{t('welcome')}</h1>
-      <p>{t('description')}</p>
-      <button onClick={() => i18n.changeLanguage('ar')}>
-        Translate to Arabic
-      </button>
+      <main className="page-wrap px-4 pb-8 pt-14">
+        <h1>Status: {message ?? 'Loading...'}</h1>
+        <h1>{t('welcome')}</h1>
+        <p>{t('description')}</p>
+        <button onClick={() => i18n.changeLanguage('ar')}>
+          Translate to Arabic
+        </button>
         <button onClick={() => i18n.changeLanguage('en')}>
-        Translate to English
-      </button>
-    </main> 
+          Translate to English
+        </button>
+      </main>
+    </>
   )
 }

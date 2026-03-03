@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Monitor, Moon, Sun } from 'lucide-react'
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { Button } from '@/components/ui/button'
 
 type ThemeMode = 'light' | 'dark' | 'auto'
 
@@ -54,29 +54,27 @@ export default function ThemeToggle() {
   }
 
   return (
-    <Select value={mode} onValueChange={handleValueChange}>
-      <SelectTrigger className="w-[130px] rounded-full border-[var(--chip-line)] bg-[var(--chip-bg)] text-[var(--sea-ink)] shadow-sm">
-        <div className="flex items-center gap-2">
-          <SelectValue placeholder="Theme" />
-        </div>
-      </SelectTrigger>
-      <SelectContent>
-        <SelectItem value="light">
-          <div className="flex items-center gap-2">
-            <Sun className="h-4 w-4" /> <span>Light</span>
-          </div>
-        </SelectItem>
-        <SelectItem value="dark">
-          <div className="flex items-center gap-2">
-            <Moon className="h-4 w-4" /> <span>Dark</span>
-          </div>
-        </SelectItem>
-        <SelectItem value="auto">
-          <div className="flex items-center gap-2">
-            <Monitor className="h-4 w-4" /> <span>System</span>
-          </div>
-        </SelectItem>
-      </SelectContent>
-    </Select>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        {/* h-12 w-12 matches your language button size */}
+        <Button variant="ghost" className="h-10 w-10 rounded-full p-0">
+          {mode === 'light' && <Sun className="!size-6" />}
+          {mode === 'dark' && <Moon className="!size-6" />}
+          {mode === 'auto' && <Monitor className="!size-6" />}
+          <span className="sr-only">Toggle theme</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem onClick={() => handleValueChange('light')}>
+          <Sun className="mr-2 h-4 w-4" /> <span>Light</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => handleValueChange('dark')}>
+          <Moon className="mr-2 h-4 w-4" /> <span>Dark</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => handleValueChange('auto')}>
+          <Monitor className="mr-2 h-4 w-4" /> <span>System</span>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }
