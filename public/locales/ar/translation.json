@@ -1,4 +1,12 @@
 {
   "welcome": "مرحباً بك في تطبيقي",
-  "description": "هذا مشروع React مع Convex و TanStack"
+  "description": "هذا مشروع React مع Convex و TanStack",
+    "nav": {
+    "home": "الرئيسية",
+    "services": "الخدمات",
+    "works": "أعمالنا",
+    "beforeAfter": "قبل وبعد",
+    "team": "الفريق",
+    "contact": "تواصل معنا"
+  }
 }

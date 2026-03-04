@@ -14,7 +14,7 @@ const ScrollableHeader = () => {
       lang={i18n.language}
       dir="ltr"
     >
-      <div className="page-wrap max-w-[1536px] mx-auto flex items-center justify-between px-4  ">
+      <div className=" max-w-[1536px] mx-auto flex items-center justify-between px-4  ">
         <div className="flex items-start gap-2">
           <LanguageSwitcher />
           <ThemeToggle />

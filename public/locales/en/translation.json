@@ -1,4 +1,12 @@
 {
   "welcome": "Welcome to my app",
-  "description": "This is a React project with Convex and TanStack"
+  "description": "This is a React project with Convex and TanStack",
+    "nav": {
+    "home": "Home",
+    "services": "Services",
+    "works": "Our Works",
+    "beforeAfter": "Before & After",
+    "team": "Team",
+    "contact": "Contact us"
+  }
 }

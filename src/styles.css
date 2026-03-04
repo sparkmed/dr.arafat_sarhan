@@ -14,7 +14,7 @@
   --sea-ink: #173a40;
   --sea-ink-soft: #416166;
   --lagoon: #4fb8b2;
-  --lagoon-deep: #328f97;
+  --lagoon-deep: #000000;
   --palm: #2f6a4a;
   --sand: #e7f0e8;
   --foam: #f3faf5;
@@ -68,7 +68,7 @@
   --sea-ink: #d7ece8;
   --sea-ink-soft: #afcdc8;
   --lagoon: #60d7cf;
-  --lagoon-deep: #8de5db;
+  --lagoon-deep: #ffffff;
   --palm: #6ec89a;
   --sand: #0f1a1e;
   --foam: #101d22;
@@ -91,7 +91,7 @@
     --sea-ink: #d7ece8;
     --sea-ink-soft: #afcdc8;
     --lagoon: #60d7cf;
-    --lagoon-deep: #8de5db;
+    --lagoon-deep: #ffffff;
     --palm: #6ec89a;
     --sand: #0f1a1e;
     --foam: #101d22;
@@ -170,7 +170,7 @@ a {
 }
 
 a:hover {
-  color: #246f76;
+  color: #000000;
 }
 
 code {
