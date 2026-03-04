@@ -1,7 +1,7 @@
-import ThemeToggle from './ThemeToggle'
-import { LanguageSwitcher } from './LanguageSwitcher'
-import ScrollableHeader from './Header/ScrollableHeader'
-import StickyHeader from './Header/StickyHeader'
+import ThemeToggle from '../ThemeToggle'
+import { LanguageSwitcher } from '../LanguageSwitcher'
+import ScrollableHeader from './ScrollableHeader'
+import StickyHeader from './StickyHeader'
 
 export default function Header() {
   return (
