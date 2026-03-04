@@ -8,5 +8,11 @@
     "beforeAfter": "Before & After",
     "team": "Team",
     "contact": "Contact us"
+  },
+    "footer": {
+    "description": "Your trusted dental care provider, committed to giving you the perfect smile with state-of-the-art technology and compassionate service.",
+    "rights": "All rights reserved.",
+    "followUs": "Follow Us",
+     "contactUs": "Contact Us"
   }
 }

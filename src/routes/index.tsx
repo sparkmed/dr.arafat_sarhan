@@ -6,6 +6,7 @@ import Header from '#/components/Header/Header'
 import EmblaCarousel from '#/components/ui/Carousel/EmblaCarousel'
 import '@/components/ui/Carousel/css/embla.css'
 import BannerOpacityCarousel from '#/components/banner-opacity-carousel'
+import Footer from '#/components/Footer/Footer'
 
 export const Route = createFileRoute('/')({ component: App })
 
@@ -26,21 +27,22 @@ function App() {
     <>
       <Header />
       <div className="lg:container flex flex-col gap-6 mb-4">
-        <div className="pt-4">
-          <BannerOpacityCarousel />
-        </div>
+        <div className="pt-4">{/* <BannerOpacityCarousel /> */}</div>
       </div>
-      <main className="page-wrap px-4 pb-8 pt-14 ">
-        <h1>Status: {message ?? 'Loading...'}</h1>
-        <h1>{t('welcome')}</h1>
-        <p>{t('description')}</p>
-        <button onClick={() => i18n.changeLanguage('ar')}>
-          Translate to Arabic
-        </button>
-        <button onClick={() => i18n.changeLanguage('en')}>
-          Translate to English
-        </button>
-      </main>
+      <div className="flex flex-col min-h-screen">
+        <main className="page-wrap px-4 pb-8 pt-14 grow">
+          <h1>Status: {message ?? 'Loading...'}</h1>
+          <h1>{t('welcome')}</h1>
+          <p>{t('description')}</p>
+          <button onClick={() => i18n.changeLanguage('ar')}>
+            Translate to Arabic
+          </button>
+          <button onClick={() => i18n.changeLanguage('en')}>
+            Translate to English
+          </button>
+        </main>
+      </div>
+      <Footer />
     </>
   )
 }

@@ -28,7 +28,10 @@ const StickyHeader = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const logoURL =
+  const darklogoURL =
+    'https://marvelous-fish-345.convex.cloud/api/storage/9d521bf6-d1e5-4138-b9d2-abe3173c7b86'
+
+  const lightLogoURL =
     'https://marvelous-fish-345.convex.cloud/api/storage/bee39baa-a87f-4a8d-9ece-8ebd42041c24'
 
   return (
@@ -41,16 +44,22 @@ const StickyHeader = () => {
       <div
         className={cn(
           'w-full max-w-[1536px] mx-auto transition-all duration-300',
-          isSticky && 'max-w-[min(100%,1920px)]',
+          isSticky && 'max-w-[min(100%,1920px)] px-6',
         )}
       >
-        <div className="flex items-center justify-between py-4 ">
+        <div className="flex items-center justify-between pb-4 ">
           <a href="/" className="shrink-0">
             <img
-              src={logoURL}
+              src={darklogoURL}
               alt="logo"
-              width={isSticky ? 140 : 180} // Shrink logo slightly when sticky
-              className="object-contain mix-blend-multiply transition-all duration-300"
+              width={isSticky ? 250 : 250} // Shrink logo slightly when sticky
+              className="hidden object-contain mix-blend-multiply transition-all duration-300 dark:block"
+            />
+            <img
+              src={lightLogoURL}
+              alt="logo"
+              width={isSticky ? 250 : 250} // Shrink logo slightly when sticky
+              className=" object-contain mix-blend-multiply transition-all duration-300 dark:hidden"
             />
           </a>
 
