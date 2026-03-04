@@ -5,8 +5,7 @@ import { useTranslation } from 'react-i18next'
 import Header from '#/components/Header/Header'
 import EmblaCarousel from '#/components/ui/Carousel/EmblaCarousel'
 import '@/components/ui/Carousel/css/embla.css'
-
-
+import BannerOpacityCarousel from '#/components/banner-opacity-carousel'
 
 export const Route = createFileRoute('/')({ component: App })
 
@@ -26,8 +25,10 @@ function App() {
   return (
     <>
       <Header />
-      <div className="py-8">
-        {/* <EmblaCarousel slides={SLIDES} options={OPTIONS} /> */}
+      <div className="lg:container flex flex-col gap-6 mb-4">
+        <div className="pt-4">
+          <BannerOpacityCarousel />
+        </div>
       </div>
       <main className="page-wrap px-4 pb-8 pt-14 ">
         <h1>Status: {message ?? 'Loading...'}</h1>
