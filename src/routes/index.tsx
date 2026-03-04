@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { useQuery } from 'convex/react'
 import { api } from '../../convex/_generated/api'
 import { useTranslation } from 'react-i18next'
-import Header from '#/components/Header'
+import Header from '#/components/Header/Header'
 import EmblaCarousel from '#/components/ui/Carousel/EmblaCarousel'
 import '@/components/ui/Carousel/css/embla.css'
 
