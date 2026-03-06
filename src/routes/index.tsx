@@ -7,6 +7,13 @@ import EmblaCarousel from '#/components/ui/Carousel/EmblaCarousel'
 import '@/components/ui/Carousel/css/embla.css'
 import BannerOpacityCarousel from '#/components/banner-opacity-carousel'
 import Footer from '#/components/Footer/Footer'
+import { PixelImage } from '@/components/ui/pixel-image'
+import { Rows } from 'lucide-react'
+import { Button } from '#/components/ui/button'
+import { Highlighter } from '@/components/ui/highlighter'
+import Hero from '#/components/Hero'
+import { PhoneCarousel } from '#/components/PhoneCarousel'
+import Treatment from '#/components/treatment'
 
 export const Route = createFileRoute('/')({ component: App })
 
@@ -16,7 +23,14 @@ const SLIDES = [
   'https://marvelous-fish-345.convex.cloud/api/storage/ff9f8256-1df0-4eac-b00a-320796900c88',
   'https://marvelous-fish-345.convex.cloud/api/storage/e2c429cd-5f26-4449-a9c5-903f0cf9360c',
   'https://marvelous-fish-345.convex.cloud/api/storage/ff9f8256-1df0-4eac-b00a-320796900c88',
-  'https://marvelous-fish-345.convex.cloud/api/storage/94f09924-9350-44a9-b14c-2924d9b51552',
+  'https://marvelous-fish-345.convex.cloud/api/storage/b744dd51-c189-488c-99a7-134509fdf546',
+]
+
+const iphoneImages = [
+  'https://marvelous-fish-345.convex.cloud/api/storage/a9a9e6fc-4e8e-41f1-902a-eeaa923c10b4',
+  'https://marvelous-fish-345.convex.cloud/api/storage/195ab70a-d37b-40b4-bf72-39d0c26ce5fd',
+  'https://marvelous-fish-345.convex.cloud/api/storage/0a30c866-446c-4751-b476-360e0b7620f2',
+  'https://marvelous-fish-345.convex.cloud/api/storage/f3f70c3c-47bf-429d-8526-4b51f45653fd',
 ]
 
 function App() {
@@ -26,22 +40,35 @@ function App() {
   return (
     <>
       <Header />
-      <div className="lg:container flex flex-col gap-6 mb-4">
-        <div className="pt-4">{/* <BannerOpacityCarousel /> */}</div>
-      </div>
+
       <div className="flex flex-col min-h-screen">
-        <main className="page-wrap px-4 pb-8 pt-14 grow">
-          <h1>Status: {message ?? 'Loading...'}</h1>
-          <h1>{t('welcome')}</h1>
-          <p>{t('description')}</p>
-          <button onClick={() => i18n.changeLanguage('ar')}>
-            Translate to Arabic
-          </button>
-          <button onClick={() => i18n.changeLanguage('en')}>
-            Translate to English
-          </button>
+        <main className=" px-4  grow">
+          <Hero />
+          <div className=" flex flex-col gap-6 mb-4">
+            {/* <div className="pt-4" dir="ltr">
+          <BannerOpacityCarousel />
+        </div> */}
+            <PhoneCarousel
+              images={iphoneImages.map((src) => ({
+                src,
+                alt: 'iPhone screen content',
+              }))}
+            />
+            <Treatment />
+          </div>
         </main>
       </div>
+{/* 
+      <h1>Status: {message ?? 'Loading...'}</h1>
+      <h1>{t('welcome')}</h1>
+      <p>{t('description')}</p>
+      <button onClick={() => i18n.changeLanguage('ar')}>
+        Translate to Arabic
+      </button>
+      <button onClick={() => i18n.changeLanguage('en')}>
+        Translate to English
+      </button> */}
+
       <Footer />
     </>
   )
