@@ -1,3 +1,4 @@
+
 export const treatmentsPargraph = {
   en: {
     Title: 'Advanced Dental Solutions',

@@ -1,7 +1,7 @@
 {
   "welcome": "Welcome to my app",
   "description": "This is a React project with Convex and TanStack",
-    "nav": {
+  "nav": {
     "home": "Home",
     "services": "Services",
     "works": "Our Works",
@@ -9,10 +9,23 @@
     "team": "Team",
     "contact": "Contact us"
   },
-    "footer": {
+  "footer": {
     "description": "Your trusted dental care provider, committed to giving you the perfect smile with state-of-the-art technology and compassionate service.",
     "rights": "All rights reserved.",
     "followUs": "Follow Us",
-     "contactUs": "Contact Us"
+    "contactUs": "Contact Us"
+  },
+  "hero": {
+    "title1": "Your Perfect Smile",
+    "title2": "Starts Here",
+    "doctorName": "Dr. Arafat Sarhan",
+    "doctorParagraph1": "is a leading dental expert with over 25 years of experience in aesthetic and implant dentistry. Having completed advanced studies at",
+    "university": "New York University (NYU),",
+    "doctorParagraph1_1":" he combines academic precision with compassionate care.",
+    "doctorQuote": "We focus on achieving the best aesthetic results using the latest global technologies, ensuring a safe and comfortable experience for the entire family.",
+    "doctorParagraph2": "His clinics offer full dental services for the entire family, aiming to maintain oral health and provide patients with a healthy, beautiful smile that lasts for years.",
+    "experience": "25+ Years of Clinical Excellence",
+    "book": "Book Appointment",
+    "services": "View Services"
   }
 }
