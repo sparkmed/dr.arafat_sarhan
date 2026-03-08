@@ -3,17 +3,13 @@ import { useQuery } from 'convex/react'
 import { api } from '../../convex/_generated/api'
 import { useTranslation } from 'react-i18next'
 import Header from '#/components/Header/Header'
-import EmblaCarousel from '#/components/ui/Carousel/EmblaCarousel'
 import '@/components/ui/Carousel/css/embla.css'
 import BannerOpacityCarousel from '#/components/banner-opacity-carousel'
 import Footer from '#/components/Footer/Footer'
-import { PixelImage } from '@/components/ui/pixel-image'
-import { Rows } from 'lucide-react'
-import { Button } from '#/components/ui/button'
-import { Highlighter } from '@/components/ui/highlighter'
 import Hero from '#/components/Hero'
 import { PhoneCarousel } from '#/components/PhoneCarousel'
 import Treatment from '#/components/treatment'
+import DragElementsComponent from '#/components/fancy/blocks/drag-elements-demo'
 
 export const Route = createFileRoute('/')({ component: App })
 
@@ -55,10 +51,14 @@ function App() {
               }))}
             />
             <Treatment />
+            <div className='page-wrap max-w-4xl  flex flex-row justify-center items-center'>
+
+              <DragElementsComponent />
+            </div>
           </div>
         </main>
       </div>
-{/* 
+      {/* 
       <h1>Status: {message ?? 'Loading...'}</h1>
       <h1>{t('welcome')}</h1>
       <p>{t('description')}</p>
