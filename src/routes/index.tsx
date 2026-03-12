@@ -14,13 +14,7 @@ import DragElementsComponent from '#/components/fancy/blocks/drag-elements-demo'
 export const Route = createFileRoute('/')({ component: App })
 
 const OPTIONS = { loop: true }
-const SLIDES = [
-  'https://marvelous-fish-345.convex.cloud/api/storage/94f09924-9350-44a9-b14c-2924d9b51552',
-  'https://marvelous-fish-345.convex.cloud/api/storage/ff9f8256-1df0-4eac-b00a-320796900c88',
-  'https://marvelous-fish-345.convex.cloud/api/storage/e2c429cd-5f26-4449-a9c5-903f0cf9360c',
-  'https://marvelous-fish-345.convex.cloud/api/storage/ff9f8256-1df0-4eac-b00a-320796900c88',
-  'https://marvelous-fish-345.convex.cloud/api/storage/b744dd51-c189-488c-99a7-134509fdf546',
-]
+
 
 const iphoneImages = [
   'https://marvelous-fish-345.convex.cloud/api/storage/a9a9e6fc-4e8e-41f1-902a-eeaa923c10b4',
@@ -58,17 +52,6 @@ function App() {
           </div>
         </main>
       </div>
-      {/* 
-      <h1>Status: {message ?? 'Loading...'}</h1>
-      <h1>{t('welcome')}</h1>
-      <p>{t('description')}</p>
-      <button onClick={() => i18n.changeLanguage('ar')}>
-        Translate to Arabic
-      </button>
-      <button onClick={() => i18n.changeLanguage('en')}>
-        Translate to English
-      </button> */}
-
       <Footer />
     </>
   )

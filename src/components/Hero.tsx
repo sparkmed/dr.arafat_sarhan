@@ -73,13 +73,11 @@ const Hero = () => {
           </Button>
         </div>
       </div>
-
-      {/* Image Side */}
       <div className=" ">
         <div className="relative rounded-3xl overflow-hidden shadow-2xl rotate-0 hover:rotate-1 transition-transform duration-200">
           <PixelImage
-            customGrid={{ rows: 3, cols: 3 }}
-            src="https://marvelous-fish-345.convex.cloud/api/storage/ebfeb54d-4bf5-4df1-abbe-59562bd2f2a4"
+            customGrid={{ rows: 1, cols: 6 }}
+            src="https://www.sparkmedagency.com/IMG_0131.JPEG"
           />
         </div>
       </div>

@@ -36,34 +36,37 @@ const StickyHeader = () => {
 
   return (
     <header
-      className=" z-10 sticky top-0 max-h-fit"
+      className={cn(
+        'z-50 sticky top-0 transition-all duration-300',
+        isSticky
+          ? 'bg-white/70 dark:bg-black/30 backdrop-blur-md border-b border-border/40 shadow-sm'
+          : 'bg-transparent',
+      )}
       lang={i18n.language}
       dir={i18n.dir()}
       id="sticky-header"
     >
       <div
         className={cn(
-          'w-full max-w-[1536px] mx-auto transition-all duration-300',
+          'w-full max-w-[1536px] mx-auto transition-all duration-300 py-2', // Added py-2 for better spacing
           isSticky && 'max-w-[min(100%,1920px)] px-6',
         )}
       >
-        <div className="flex items-center justify-between pb-4 ">
+        <div className="flex items-center justify-between">
           <a href="/" className="shrink-0">
             <img
               src={darklogoURL}
               alt="logo"
-              width={isSticky ? 250 : 250} // Shrink logo slightly when sticky
+              width={isSticky ? 180 : 250} // Shrink logo slightly on scroll for a smoother feel
               className="hidden object-contain mix-blend-multiply transition-all duration-300 dark:block"
             />
             <img
               src={lightLogoURL}
               alt="logo"
-              width={isSticky ? 250 : 250} // Shrink logo slightly when sticky
-              className=" object-contain mix-blend-multiply transition-all duration-300 dark:hidden"
+              width={isSticky ? 180 : 250}
+              className="object-contain mix-blend-multiply transition-all duration-300 dark:hidden"
             />
           </a>
-
-          {/* NAVIGATION LINKS */}
           <nav className="hidden md:flex items-center gap-2 lg:gap-6">
             {navItems.map((item) => (
               <Button
