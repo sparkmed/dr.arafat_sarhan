@@ -28,7 +28,7 @@ const BannerOpacityCarousel = () => {
           <img
             src={slide}
             alt={`Slide ${index + 1}`}
-            className="block border-r-4 w-full aspect-[4/2] object-cover"
+            className="block border-r-4 w-full aspect-6/3 object-cover"
           />
         </a>
       ))}

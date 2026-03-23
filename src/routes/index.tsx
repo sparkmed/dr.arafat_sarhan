@@ -3,44 +3,67 @@ import { useQuery } from 'convex/react'
 import { api } from '../../convex/_generated/api'
 import { useTranslation } from 'react-i18next'
 import Header from '#/components/Header/Header'
-import EmblaCarousel from '#/components/ui/Carousel/EmblaCarousel'
 import '@/components/ui/Carousel/css/embla.css'
 import BannerOpacityCarousel from '#/components/banner-opacity-carousel'
+import Footer from '#/components/Footer/Footer'
+import Hero from '#/components/Hero'
+import { PhoneCarousel } from '#/components/PhoneCarousel'
+import Treatment from '#/components/treatment'
+import DragElementsComponent from '#/components/fancy/blocks/drag-elements-demo'
+import { BokehBackground } from '#/components/ui/bokeh'
 
 export const Route = createFileRoute('/')({ component: App })
 
 const OPTIONS = { loop: true }
-const SLIDES = [
-  'https://marvelous-fish-345.convex.cloud/api/storage/94f09924-9350-44a9-b14c-2924d9b51552',
-  'https://marvelous-fish-345.convex.cloud/api/storage/ff9f8256-1df0-4eac-b00a-320796900c88',
-  'https://marvelous-fish-345.convex.cloud/api/storage/e2c429cd-5f26-4449-a9c5-903f0cf9360c',
-  'https://marvelous-fish-345.convex.cloud/api/storage/ff9f8256-1df0-4eac-b00a-320796900c88',
-  'https://marvelous-fish-345.convex.cloud/api/storage/94f09924-9350-44a9-b14c-2924d9b51552',
+
+const iphoneImages = [
+  'https://marvelous-fish-345.convex.cloud/api/storage/a9a9e6fc-4e8e-41f1-902a-eeaa923c10b4',
+  'https://marvelous-fish-345.convex.cloud/api/storage/195ab70a-d37b-40b4-bf72-39d0c26ce5fd',
+  'https://marvelous-fish-345.convex.cloud/api/storage/0a30c866-446c-4751-b476-360e0b7620f2',
+  'https://marvelous-fish-345.convex.cloud/api/storage/f3f70c3c-47bf-429d-8526-4b51f45653fd',
 ]
 
 function App() {
-  const message = useQuery(api.hello.get)
-  const { t, i18n } = useTranslation()
-
   return (
     <>
       <Header />
-      <div className="lg:container flex flex-col gap-6 mb-4">
-        <div className="pt-4">
+      <div className="flex flex-col min-h-screen">
+        <main className=" px-4  grow">
+          <Hero />
+          <div className="relative overflow-hidden rounded-[2.5rem] py-12 border border-border/50">
+            <BokehBackground
+              className="absolute inset-0"
+              count={18}
+              speed={0.6}
+              colors={[
+                'rgba(219, 122, 95, 0.2)', // Your Primary Terracotta
+                'rgba(245, 158, 11, 0.15)', // Your Highlight Gold
+                'rgba(255, 255, 255, 0.05)', // Soft White
+              ]}
+            />
+
+            <div className=" flex flex-col gap-6 mb-4">
+              {/* <div className="pt-4" dir="ltr">
           <BannerOpacityCarousel />
-        </div>
+        </div> */}
+
+              <div className="relative z-10">
+                <PhoneCarousel
+                  images={iphoneImages.map((src) => ({
+                    src,
+                    alt: 'iPhone screen content',
+                  }))}
+                />
+                <Treatment />
+                <div className="page-wrap max-w-4xl  flex flex-row justify-center items-center">
+                  <DragElementsComponent />
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
       </div>
-      <main className="page-wrap px-4 pb-8 pt-14 ">
-        <h1>Status: {message ?? 'Loading...'}</h1>
-        <h1>{t('welcome')}</h1>
-        <p>{t('description')}</p>
-        <button onClick={() => i18n.changeLanguage('ar')}>
-          Translate to Arabic
-        </button>
-        <button onClick={() => i18n.changeLanguage('en')}>
-          Translate to English
-        </button>
-      </main>
+      <Footer />
     </>
   )
 }

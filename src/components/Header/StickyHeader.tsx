@@ -2,12 +2,24 @@ import { cn } from '#/lib/utils'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Button } from '../ui/button'
+import { Menu } from 'lucide-react'
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet'
+import { LanguageSwitcher } from '../LanguageSwitcher'
+import ThemeToggle from '../ThemeToggle'
 
 const StickyHeader = () => {
   const { t, i18n } = useTranslation()
   const [isSticky, setIsSticky] = useState(false)
 
-  // 1. Define your navigation items
   const navItems = [
     { label: t('nav.home'), href: '#' },
     { label: t('nav.services'), href: '#services' },
@@ -20,62 +32,96 @@ const StickyHeader = () => {
     const handleScroll = () => {
       const stickyElement = document.getElementById('sticky-header')
       if (stickyElement) {
-        const rect = stickyElement.getBoundingClientRect()
-        setIsSticky(rect.top <= 0)
+        setIsSticky(stickyElement.getBoundingClientRect().top <= 0)
       }
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const logoURL =
-    'https://marvelous-fish-345.convex.cloud/api/storage/bee39baa-a87f-4a8d-9ece-8ebd42041c24'
+  const darklogoURL = 'https://marvelous-fish-345.convex.cloud/api/storage/9d521bf6-d1e5-4138-b9d2-abe3173c7b86'
+  const lightLogoURL = 'https://marvelous-fish-345.convex.cloud/api/storage/bee39baa-a87f-4a8d-9ece-8ebd42041c24'
 
   return (
     <header
-      className=" z-10 sticky top-0 max-h-fit"
+      id="sticky-header"
       lang={i18n.language}
       dir={i18n.dir()}
-      id="sticky-header"
+      className={cn(
+        'z-50 sticky top-0 transition-all duration-300 w-full',
+        isSticky
+          ? 'bg-white/80 dark:bg-black/50 backdrop-blur-md border-b border-border/40 shadow-sm'
+          : 'bg-transparent',
+      )}
     >
-      <div
-        className={cn(
-          'w-full max-w-[1536px] mx-auto transition-all duration-300',
-          isSticky && 'max-w-[min(100%,1920px)]',
-        )}
-      >
-        <div className="flex items-center justify-between py-4 ">
-          <a href="/" className="shrink-0">
-            <img
-              src={logoURL}
-              alt="logo"
-              width={isSticky ? 140 : 180} // Shrink logo slightly when sticky
-              className="object-contain mix-blend-multiply transition-all duration-300"
-            />
-          </a>
+      <div className="max-w-[1536px] mx-auto px-4 py-3">
+        <div className="flex items-center justify-between">
+          
+          {/* DESKTOP LOGO */}
+          <div className="hidden md:block">
+            <a href="/" className="shrink-0">
+              <img src={darklogoURL} alt="logo" width={isSticky ? 150 : 200} className="hidden dark:block object-contain transition-all" />
+              <img src={lightLogoURL} alt="logo" width={isSticky ? 150 : 200} className="dark:hidden object-contain transition-all" />
+            </a>
+          </div>
 
-          {/* NAVIGATION LINKS */}
-          <nav className="hidden md:flex items-center gap-2 lg:gap-6">
+          {/* DESKTOP NAV */}
+          <nav className="hidden md:flex items-center gap-6">
             {navItems.map((item) => (
-              <Button
-                key={item.href}
-                variant="ghost"
-                asChild
-                className="text-sm font-medium hover:bg-transparent"
-              >
-                <a
-                  href={item.href}
-                  className="text-foreground hover:text-primary transition-colors no-underline"
-                >
-                  {item.label}
-                </a>
-              </Button>
+              <a key={item.href} href={item.href} className="text-sm font-medium hover:text-primary transition-colors">
+                {item.label}
+              </a>
             ))}
           </nav>
+
+          {/* MOBILE HEADER CONTAINER */}
+          <div className="md:hidden flex items-center justify-between w-full">
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="hover:bg-transparent">
+                  <Menu className="h-8 w-8 text-foreground" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side={i18n.dir() === 'rtl' ? 'right' : 'left'} className="flex flex-col">
+                <SheetHeader className="text-left border-b pb-4">
+                  <SheetTitle>{t('nav.Menu') || 'Menu'}</SheetTitle>
+                </SheetHeader>
+                
+                {/* Mobile Links */}
+                <nav className="flex flex-col gap-2 mt-6 grow">
+                  {navItems.map((item) => (
+                    <SheetClose asChild key={item.href}>
+                      <a href={item.href} className="text-lg font-medium py-3 border-b border-border/10">
+                        {item.label}
+                      </a>
+                    </SheetClose>
+                  ))}
+                </nav>
+
+                {/* Mobile Bottom Settings */}
+                <div className="mt-auto space-y-4 pt-6 border-t">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium">{t('nav.Choose Language')}</span>
+                    <LanguageSwitcher />
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium">{t('nav.Choose Theme')}</span>
+                    <ThemeToggle />
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
+
+            {/* MOBILE LOGO */}
+            <a href="/" className="shrink-0">
+              <img src={darklogoURL} alt="logo" width={150} className="hidden dark:block object-contain" />
+              <img src={lightLogoURL} alt="logo" width={150} className="dark:hidden object-contain" />
+            </a>
+          </div>
+
         </div>
       </div>
     </header>
   )
 }
-
 export default StickyHeader
