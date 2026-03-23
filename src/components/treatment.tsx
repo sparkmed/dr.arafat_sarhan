@@ -40,11 +40,11 @@ const Treatment = () => {
                 <p className="text-muted-foreground">
                   {treatment[currentLanguage].details}
                 </p>
-                <Button asChild className="mt-6 gap-3 rounded-full" size="lg">
+                {/* <Button asChild className="mt-6 gap-3 rounded-full" size="lg">
                   <a href={treatment[currentLanguage].tutorialLink}>
                     Learn More <ArrowRight />
                   </a>
-                </Button>
+                </Button> */}
               </div>
             </div>
           ))}

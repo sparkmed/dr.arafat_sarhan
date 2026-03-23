@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router'
 import { Button } from './ui/button'
 import { Highlighter } from './ui/highlighter'
 import { PixelImage } from './ui/pixel-image'
@@ -15,15 +16,17 @@ const Hero = () => {
             strokeWidth={3}
             padding={2}
           >
-            {t('hero.title1')}
+            <span className="relative inline-block">{t('hero.title1')}</span>
           </Highlighter>
           <br />
-          <span className="text-primary italic">{t('hero.title2')}</span>
+          <span className="relative text-primary italic">
+            {t('hero.title2')}
+          </span>
         </h1>
         <div className="space-y-6 text-center lg:text-start text-lg text-muted-foreground max-w-3xl leading-relaxed">
           <p>
             <Highlighter action="highlight" color="rgba(245, 158, 11, 0.15)">
-              <span className="text-foreground font-semibold text-xl">
+              <span className="relative text-foreground font-semibold text-xl">
                 {t('hero.doctorName')}
               </span>
             </Highlighter>{' '}
@@ -59,10 +62,11 @@ const Hero = () => {
         {/* Actions */}
         <div className="flex flex-wrap gap-4 pt-2">
           <Button
+            asChild
             size="lg"
             className="rounded-full px-10 h-14 text-base font-bold shadow-lg shadow-primary/20 hover:scale-105 transition-transform"
           >
-            Book Appointment
+            <Link to="/bookappointment">Book Appointment</Link>
           </Button>
           <Button
             variant="outline"

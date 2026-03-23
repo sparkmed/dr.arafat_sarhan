@@ -1,18 +1,19 @@
-import { useEffect, useRef } from "react"
-import type React from "react"
-import { useInView } from "motion/react"
-import { annotate } from "rough-notation"
-import { type RoughAnnotation } from "rough-notation/lib/model"
+import { useEffect, useRef } from 'react'
+import type React from 'react'
+import { useInView } from 'motion/react'
+import { annotate } from 'rough-notation'
+import { type RoughAnnotation } from 'rough-notation/lib/model'
 
 type AnnotationAction =
-  | "highlight"
-  | "underline"
-  | "box"
-  | "circle"
-  | "strike-through"
-  | "crossed-off"
-  | "bracket"
+  | 'highlight'
+  | 'underline'
+  | 'box'
+  | 'circle'
+  | 'strike-through'
+  | 'crossed-off'
+  | 'bracket'
 
+// 2. Define the missing Interface
 interface HighlighterProps {
   children: React.ReactNode
   action?: AnnotationAction
@@ -27,8 +28,8 @@ interface HighlighterProps {
 
 export function Highlighter({
   children,
-  action = "highlight",
-  color = "#ffd1dc",
+  action = 'highlight',
+  color = '#ffd1dc',
   strokeWidth = 1.5,
   animationDuration = 600,
   iterations = 2,
@@ -41,18 +42,15 @@ export function Highlighter({
 
   const isInView = useInView(elementRef, {
     once: true,
-    margin: "-10%",
+    margin: '-10%',
   })
 
-  // If isView is false, always show. If isView is true, wait for inView
   const shouldShow = !isView || isInView
 
   useEffect(() => {
-    if (!shouldShow) return
+    if (!shouldShow || !elementRef.current) return
 
     const element = elementRef.current
-    if (!element) return
-
     const annotationConfig = {
       type: action,
       color,
@@ -64,23 +62,31 @@ export function Highlighter({
     }
 
     const annotation = annotate(element, annotationConfig)
-
     annotationRef.current = annotation
-    annotationRef.current.show()
+    annotation.show()
 
-    const resizeObserver = new ResizeObserver(() => {
-      annotation.hide()
-      annotation.show()
-    })
+    // 1. Refresh logic to reposition the SVG
+    const refreshAnnotation = () => {
+      if (annotationRef.current) {
+        // rough-notation's built-in refresh method is more efficient than hide/show
+        // @ts-ignore - rough-notation types sometimes miss 'isShowing'
+        annotationRef.current.hide()
+        annotationRef.current.show()
+      }
+    }
 
+    // 2. Observe both size AND layout shifts
+    const resizeObserver = new ResizeObserver(refreshAnnotation)
     resizeObserver.observe(element)
-    resizeObserver.observe(document.body)
+
+    // 3. LISTEN FOR SCROLL: This fixes the Sticky Header shift
+    // We add a small delay or check to reposition when the sticky header kicks in
+    window.addEventListener('scroll', refreshAnnotation, { passive: true })
 
     return () => {
-      if (element) {
-        annotate(element, { type: action }).remove()
-        resizeObserver.disconnect()
-      }
+      annotation.remove()
+      resizeObserver.disconnect()
+      window.removeEventListener('scroll', refreshAnnotation)
     }
   }, [
     shouldShow,
@@ -94,7 +100,7 @@ export function Highlighter({
   ])
 
   return (
-    <span ref={elementRef} className="relative inline-block bg-transparent">
+    <span ref={elementRef} className="relative inline-block">
       {children}
     </span>
   )

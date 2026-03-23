@@ -270,7 +270,7 @@ export const PhoneCarousel: React.FC<PhoneCarouselProps> = ({
 
   return (
     <section
-      className="relative w-full py-6 md:py-10 overflow-hidden"
+      className="relative w-full py-6 md:py-10 overflow-hidden h-[650px] md:h-[800px] lg:h-auto"
       aria-label="iPhone product showcase"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

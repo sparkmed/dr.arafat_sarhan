@@ -10,11 +10,11 @@ import Hero from '#/components/Hero'
 import { PhoneCarousel } from '#/components/PhoneCarousel'
 import Treatment from '#/components/treatment'
 import DragElementsComponent from '#/components/fancy/blocks/drag-elements-demo'
+import { BokehBackground } from '#/components/ui/bokeh'
 
 export const Route = createFileRoute('/')({ component: App })
 
 const OPTIONS = { loop: true }
-
 
 const iphoneImages = [
   'https://marvelous-fish-345.convex.cloud/api/storage/a9a9e6fc-4e8e-41f1-902a-eeaa923c10b4',
@@ -24,30 +24,41 @@ const iphoneImages = [
 ]
 
 function App() {
-  const message = useQuery(api.hello.get)
-  const { t, i18n } = useTranslation()
-
   return (
     <>
       <Header />
-
       <div className="flex flex-col min-h-screen">
         <main className=" px-4  grow">
           <Hero />
-          <div className=" flex flex-col gap-6 mb-4">
-            {/* <div className="pt-4" dir="ltr">
+          <div className="relative overflow-hidden rounded-[2.5rem] py-12 border border-border/50">
+            <BokehBackground
+              className="absolute inset-0"
+              count={18}
+              speed={0.6}
+              colors={[
+                'rgba(219, 122, 95, 0.2)', // Your Primary Terracotta
+                'rgba(245, 158, 11, 0.15)', // Your Highlight Gold
+                'rgba(255, 255, 255, 0.05)', // Soft White
+              ]}
+            />
+
+            <div className=" flex flex-col gap-6 mb-4">
+              {/* <div className="pt-4" dir="ltr">
           <BannerOpacityCarousel />
         </div> */}
-            <PhoneCarousel
-              images={iphoneImages.map((src) => ({
-                src,
-                alt: 'iPhone screen content',
-              }))}
-            />
-            <Treatment />
-            <div className='page-wrap max-w-4xl  flex flex-row justify-center items-center'>
 
-              <DragElementsComponent />
+              <div className="relative z-10">
+                <PhoneCarousel
+                  images={iphoneImages.map((src) => ({
+                    src,
+                    alt: 'iPhone screen content',
+                  }))}
+                />
+                <Treatment />
+                <div className="page-wrap max-w-4xl  flex flex-row justify-center items-center">
+                  <DragElementsComponent />
+                </div>
+              </div>
             </div>
           </div>
         </main>

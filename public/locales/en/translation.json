@@ -7,7 +7,10 @@
     "works": "Our Works",
     "beforeAfter": "Before & After",
     "team": "Team",
-    "contact": "Contact us"
+    "contact": "Contact us",
+    "Menu": "Menu",
+    "Choose Language": "Choose Language",
+    "Choose Theme": "Choose Theme"
   },
   "footer": {
     "description": "Your trusted dental care provider, committed to giving you the perfect smile with state-of-the-art technology and compassionate service.",
@@ -21,7 +24,7 @@
     "doctorName": "Dr. Arafat Sarhan",
     "doctorParagraph1": "is a leading dental expert with over 25 years of experience in aesthetic and implant dentistry. Having completed advanced studies at",
     "university": "New York University (NYU),",
-    "doctorParagraph1_1":" he combines academic precision with compassionate care.",
+    "doctorParagraph1_1": " he combines academic precision with compassionate care.",
     "doctorQuote": "We focus on achieving the best aesthetic results using the latest global technologies, ensuring a safe and comfortable experience for the entire family.",
     "doctorParagraph2": "His clinics offer full dental services for the entire family, aiming to maintain oral health and provide patients with a healthy, beautiful smile that lasts for years.",
     "experience": "25+ Years of Clinical Excellence",
