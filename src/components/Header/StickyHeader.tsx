@@ -48,7 +48,7 @@ const StickyHeader = () => {
       lang={i18n.language}
       dir={i18n.dir()}
       className={cn(
-        'z-50 sticky top-0 transition-all duration-300 w-full',
+        'z-50 sticky top-0 transition-all duration-300 w-full h-[85px] my-auto',
         isSticky
           ? 'bg-white/80 dark:bg-black/50 backdrop-blur-md border-b border-border/40 shadow-sm'
           : 'bg-transparent',

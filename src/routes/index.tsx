@@ -33,7 +33,7 @@ function App() {
           <div className="relative overflow-hidden rounded-[2.5rem] py-12 border border-border/50">
             <BokehBackground
               className="absolute inset-0"
-              count={18}
+              count={40}
               speed={0.6}
               colors={[
                 'rgba(219, 122, 95, 0.2)', // Your Primary Terracotta
