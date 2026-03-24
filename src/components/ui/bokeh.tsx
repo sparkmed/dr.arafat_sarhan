@@ -75,7 +75,7 @@ export function BokehBackground({
         vy: (Math.random() - 0.5) * 0.3 * speed,
         size,
         color: colors[Math.floor(Math.random() * colors.length)],
-        opacity: 0.15 + Math.random() * 0.2,
+        opacity: 0.25 + Math.random() * 0.2,
         pulseOffset: Math.random() * Math.PI * 2,
         pulseSpeed: 0.005 + Math.random() * 0.01,
       }
