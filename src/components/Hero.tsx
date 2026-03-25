@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 const Hero = () => {
   const { t } = useTranslation()
   return (
-    <div className="flex flex-col lg:flex-row items-center justify-between p-8 lg:p-16 bg-card border-border border-[1px] rounded-[2rem] shadow-sm gap-12">
+    <div className="flex flex-col lg:flex-row items-center justify-between p-8 lg:p-16 bg-card border-border border-[1px] rounded-[2rem] shadow-sm gap-12 mx-4">
       <div className="flex flex-col items-center lg:items-start w-full lg:w-1/2 gap-y-8">
         <h1 className="display-title text-4xl lg:text-6xl text-center lg:text-start leading-[1.15] tracking-tight">
           <Highlighter
@@ -51,29 +51,29 @@ const Hero = () => {
         </div>
 
         {/* Experience Badge */}
-        <div className="flex items-center gap-3 px-5 py-2 bg-primary/5 border border-primary/20 text-primary rounded-full text-sm font-semibold tracking-wide uppercase">
+        <div className="flex items-center gap-3 px-5 py-2 bg-primary/5 border border-primary/20 text-primary rounded-full md:text-sm text-xs font-semibold tracking-wide uppercase">
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
           </span>
-          25+ Years of Clinical Excellence
+          {t('hero.clinicalExcellence')}
         </div>
 
         {/* Actions */}
-        <div className="flex flex-wrap gap-4 pt-2">
+        <div className="flex flex-wrap items-center justify-center  gap-4 pt-2">
           <Button
             asChild
             size="lg"
             className="rounded-full px-10 h-14 text-base font-bold shadow-lg shadow-primary/20 hover:scale-105 transition-transform"
           >
-            <Link to="/bookappointment">Book Appointment</Link>
+            <Link to="/bookappointment">{t('common.bookAppointment')}</Link>
           </Button>
           <Button
             variant="outline"
             size="lg"
             className="rounded-full px-10 h-14 text-base font-medium hover:bg-primary/5"
           >
-            View Services
+            {t('common.services')}
           </Button>
         </div>
       </div>

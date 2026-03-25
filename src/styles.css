@@ -183,3 +183,25 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes initial-wiggle {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+  75% {
+    transform: rotate(-1deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-wiggle {
+  animation: initial-wiggle 0.5s ease-in-out;
+}
