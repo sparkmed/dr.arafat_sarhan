@@ -49,16 +49,35 @@ const Footer = () => {
             </h3>
             <ul className="space-y-4 text-muted-foreground pt-3">
               <li className="flex items-center gap-3 lg:justify-start">
-                <Phone className="size-5 text-primary" />
-                <span className="text-sm">+972 599 888 009</span>
+                <a
+                  href="tel:+972599888009"
+                  className="flex items-center gap-3 hover:text-primary transition-colors"
+                >
+                  <Phone className="size-5 text-primary" />
+                  <span dir="ltr" className="text-sm">
+                    +972 599 888 009
+                  </span>
+                </a>
               </li>
               <li className="flex items-center gap-3 lg:justify-start">
-                <Mail className="size-5 text-primary" />
-                <span className="text-sm">info@drarafatsarhan.com</span>
+                <a
+                  href="mailto:info@drarafatsarhan.com"
+                  className="flex items-center gap-3 hover:text-primary transition-colors"
+                >
+                  <Mail className="size-5 text-primary" />
+                  <span className="text-sm">info@drarafatsarhan.com</span>
+                </a>
               </li>
               <li className="flex items-center gap-3 lg:justify-start">
-                <MapPin className="size-5 text-primary" />
-                <span className="text-sm">Irsal street, Ramallah</span>
+                <a
+                  href="https://maps.google.com/?cid=10643237726814099851&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 hover:text-primary transition-colors"
+                >
+                  <MapPin className="size-5 text-primary" />
+                  <span className="text-sm">Irsal street, Ramallah</span>
+                </a>
               </li>
             </ul>
           </div>
@@ -67,36 +86,39 @@ const Footer = () => {
               {t('footer.followUs')}
             </h3>
             <div className="flex items-center gap-4 pt-2">
+              {/* Instagram */}
               <Button
                 variant="outline"
                 size="icon"
                 className="rounded-full hover:text-primary transition-colors"
                 asChild
               >
-                <a href="#" target="_blank">
+                <a
+                  href="https://www.instagram.com/drarafatsarhan"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Instagram className="size-5" />
                 </a>
               </Button>
+
+              {/* Facebook */}
               <Button
                 variant="outline"
                 size="icon"
                 className="rounded-full hover:text-primary transition-colors"
                 asChild
               >
-                <a href="#" target="_blank">
+                <a
+                  href="https://www.facebook.com/DrArafatSarhan"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Facebook className="size-5" />
                 </a>
               </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                className="rounded-full hover:text-primary transition-colors"
-                asChild
-              >
-                <a href="#" target="_blank">
-                  <Send className="size-5" />
-                </a>
-              </Button>
+
+              {/* Email */}
               <Button
                 variant="outline"
                 size="icon"

@@ -8,11 +8,11 @@ const Treatment = () => {
   const currentLanguage = (i18n.language.startsWith('ar') ? 'ar' : 'en') as
     | 'en'
     | 'ar'
-
+const direction = currentLanguage === 'ar' ? 'rtl' : 'ltr'
   return (
-    <div className="flex min-h-screen items-center justify-center">
+    <div dir={direction} className="flex min-h-screen items-center justify-center">
       <div className="w-full max-w-(--breakpoint-lg) px-6 py-10">
-        <h2 className="text-pretty font-semibold text-4xl tracking-[-0.03em] sm:mx-auto sm:max-w-xl sm:text-center md:text-[2.75rem] md:leading-[1.2]">
+        <h2 className="text-pretty font-semibold text-2xl md:text-4xl tracking-[-0.03em] sm:mx-auto sm:max-w-xl sm:text-center md:text-[2.75rem] md:leading-[1.2]">
           {treatmentsPargraph[currentLanguage].Title}
         </h2>
         <p className="mt-2 text-lg text-muted-foreground sm:text-center sm:text-xl">

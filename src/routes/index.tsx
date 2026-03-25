@@ -17,10 +17,9 @@ export const Route = createFileRoute('/')({ component: App })
 const OPTIONS = { loop: true }
 
 const iphoneImages = [
-  'https://marvelous-fish-345.convex.cloud/api/storage/a9a9e6fc-4e8e-41f1-902a-eeaa923c10b4',
-  'https://marvelous-fish-345.convex.cloud/api/storage/195ab70a-d37b-40b4-bf72-39d0c26ce5fd',
-  'https://marvelous-fish-345.convex.cloud/api/storage/0a30c866-446c-4751-b476-360e0b7620f2',
-  'https://marvelous-fish-345.convex.cloud/api/storage/f3f70c3c-47bf-429d-8526-4b51f45653fd',
+  'https://www.sparkmedagency.com/Dashboard.jpg',
+  'https://www.sparkmedagency.com/our-services.jpg',
+  'https://www.sparkmedagency.com/drarafatintro.jpg',
 ]
 
 function App() {
@@ -28,9 +27,9 @@ function App() {
     <>
       <Header />
       <div className="flex flex-col min-h-screen">
-        <main className=" px-4  grow">
+        <main className=" px-4 py-8 grow">
           <Hero />
-          <div className="relative overflow-hidden rounded-[2.5rem] py-12 border border-border/50">
+          <div className="relative overflow-hidden  mt-4">
             <BokehBackground
               className="absolute inset-0"
               count={40}
@@ -47,9 +46,8 @@ function App() {
           <BannerOpacityCarousel />
         </div> */}
 
-              <div dir='ltr' className="relative z-10">
-               
-                <PhoneCarousel  
+              <div dir="ltr" className="relative z-10">
+                <PhoneCarousel
                   images={iphoneImages.map((src) => ({
                     src,
                     alt: 'iPhone screen content',

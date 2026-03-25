@@ -29,6 +29,43 @@
     "doctorParagraph2": "His clinics offer full dental services for the entire family, aiming to maintain oral health and provide patients with a healthy, beautiful smile that lasts for years.",
     "experience": "25+ Years of Clinical Excellence",
     "book": "Book Appointment",
+    "services": "View Services",
+    "clinicalExcellence": "25+ Years of Clinical Excellence"
+  },
+  "common": {
+    "bookAppointment": "Book Appointment",
     "services": "View Services"
+  },
+  "appointment": {
+    "backHome": "Back to Home",
+    "title": "Book Appointment",
+    "description": "Fill in your details to secure your spot.",
+    "labelName": "Full Name",
+    "placeholderName": "Enter your name",
+    "labelPhone": "Phone Number",
+    "placeholderPhone": "05x xxx xxxx",
+    "labelService": "Service",
+    "placeholderService": "Select a service",
+    "labelDate": "Preferred Date",
+    "btnSubmit": "Request Appointment",
+    "btnProcessing": "Processing...",
+    "success": "Appointment requested successfully!",
+    "error": "Failed to book:",
+    "validation": {
+      "name": "Name must be at least 2 characters",
+      "phone": "Please enter a valid phone number",
+      "service": "Please select a service",
+      "date": "Please select a date"
+    },
+    "services": {
+      "general": "General Dentistry",
+      "implant": "Dental Implants",
+      "ortho": "Orthodontics",
+      "cosmetic": "Cosmetic Dentistry"
+    },
+    "appointment": {
+      "alertTitle": "Request Sent Successfully",
+      "alertDesc": "Your appointment request has been received. Our team will contact you shortly to confirm."
+    }
   }
 }
