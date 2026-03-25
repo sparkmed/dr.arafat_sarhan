@@ -47,8 +47,9 @@ function App() {
           <BannerOpacityCarousel />
         </div> */}
 
-              <div className="relative z-10">
-                <PhoneCarousel
+              <div dir='ltr' className="relative z-10">
+               
+                <PhoneCarousel  
                   images={iphoneImages.map((src) => ({
                     src,
                     alt: 'iPhone screen content',

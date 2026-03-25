@@ -80,7 +80,7 @@ const Iphone15Pro: React.FC<Iphone15ProProps> = ({
             clipPath="url(#roundedCorners)"
           >
             <div
-              style={{ width: "100%", height: "100%", position: "relative" }}
+              style={{ width: "100%", height: "100%", overflow: "hidden" }}
             >
               <img
                 src={src || "/placeholder.svg"}
@@ -171,7 +171,7 @@ export const PhoneCarousel: React.FC<PhoneCarouselProps> = ({
 
   if (!isClient) {
     return (
-      <div className="w-full h-[400px] flex items-center justify-center">
+      <div  className="w-full h-[400px] flex items-center justify-center ">
         <div className="animate-pulse w-64 h-96 rounded-3xl"></div>
       </div>
     );
@@ -190,7 +190,7 @@ export const PhoneCarousel: React.FC<PhoneCarouselProps> = ({
     const nextImage = featuresData[next].images[0];
 
     return (
-      <section
+      <section 
         className={cn(
           "relative w-full py-6 md:py-10 overflow-visible",
           className
@@ -208,7 +208,7 @@ export const PhoneCarousel: React.FC<PhoneCarouselProps> = ({
                 zIndex: 10,
               }}
             >
-              <Iphone15Pro
+              <Iphone15Pro 
                 width={isMobile ? 280 : 350}
                 height="auto"
                 src={prevImage.src}
@@ -217,7 +217,7 @@ export const PhoneCarousel: React.FC<PhoneCarouselProps> = ({
             </div>
 
             {/* 2) Middle phone (next) */}
-            <div
+            <div 
               className="absolute opacity-80"
               style={{
                 transform: "translateY(25px) scale(0.96)",
