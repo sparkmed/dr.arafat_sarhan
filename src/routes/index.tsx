@@ -1,16 +1,17 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { useQuery } from 'convex/react'
-import { api } from '../../convex/_generated/api'
-import { useTranslation } from 'react-i18next'
 import Header from '#/components/Header/Header'
 import '@/components/ui/Carousel/css/embla.css'
-import BannerOpacityCarousel from '#/components/banner-opacity-carousel'
 import Footer from '#/components/Footer/Footer'
 import Hero from '#/components/Hero'
 import { PhoneCarousel } from '#/components/PhoneCarousel'
 import Treatment from '#/components/treatment'
 import DragElementsComponent from '#/components/fancy/blocks/drag-elements-demo'
 import { BokehBackground } from '#/components/ui/bokeh'
+import FindUs from '#/components/find-us'
+import Reviews from '#/components/reviews'
+
+
+
 
 export const Route = createFileRoute('/')({ component: App })
 
@@ -23,6 +24,7 @@ const iphoneImages = [
 ]
 
 function App() {
+
   return (
     <>
       <Header />
@@ -57,6 +59,12 @@ function App() {
                 <div className="page-wrap max-w-4xl  flex flex-row justify-center items-center">
                   <DragElementsComponent />
                 </div>
+                <div className="page-wrap max-w-4xl  flex flex-row justify-center items-center">
+                  <FindUs />
+                </div>
+                <section className="">
+                 <Reviews />
+                </section>
               </div>
             </div>
           </div>
