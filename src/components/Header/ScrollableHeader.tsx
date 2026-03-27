@@ -7,7 +7,7 @@ import { MessageSquareShare } from 'lucide-react'
 const ScrollableHeader = () => {
   const { t } = useTranslation()
   const { i18n } = useTranslation()
-  const contactWhatsApp = '00972599043747'
+  const contactWhatsApp = '00970597559922'
   return (
     <div
       className="hidden border-b-[0.5px] border-muted  lg:block  w-full py-2 "

@@ -9,9 +9,7 @@ import DragElementsComponent from '#/components/fancy/blocks/drag-elements-demo'
 import { BokehBackground } from '#/components/ui/bokeh'
 import FindUs from '#/components/find-us'
 import Reviews from '#/components/reviews'
-
-
-
+import ComparisonCom from '#/components/comparison'
 
 export const Route = createFileRoute('/')({ component: App })
 
@@ -24,7 +22,6 @@ const iphoneImages = [
 ]
 
 function App() {
-
   return (
     <>
       <Header />
@@ -44,26 +41,33 @@ function App() {
             />
 
             <div className=" flex flex-col gap-6 mb-4">
-              {/* <div className="pt-4" dir="ltr">
-          <BannerOpacityCarousel />
-        </div> */}
-
-              <div dir="ltr" className="relative z-10">
+              <div dir="ltr" className="relative z-10 mt-4">
                 <PhoneCarousel
                   images={iphoneImages.map((src) => ({
                     src,
                     alt: 'iPhone screen content',
                   }))}
                 />
-                <Treatment />
-                <div className="page-wrap max-w-4xl  flex flex-row justify-center items-center">
+                <section id="our-services" className="scroll-mt-20">
+                  <Treatment />
+                </section>
+                <div className="py-6" id="before-after">
+                  <ComparisonCom />
+                </div>
+                <div
+                  className="page-wrap max-w-4xl  flex flex-row justify-center items-center"
+                  id="our-vibes"
+                >
                   <DragElementsComponent />
                 </div>
-                <div className="page-wrap max-w-4xl  flex flex-row justify-center items-center">
+                <div
+                  className="page-wrap max-w-4xl  flex flex-row justify-center items-center"
+                  id="find-us"
+                >
                   <FindUs />
                 </div>
-                <section className="">
-                 <Reviews />
+                <section id="reviews">
+                  <Reviews />
                 </section>
               </div>
             </div>

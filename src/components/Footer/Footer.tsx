@@ -7,6 +7,7 @@ import {
   MapPin,
   MessageCircle,
   Phone,
+  PhoneForwarded,
   Send,
 } from 'lucide-react'
 const darklogoURL =
@@ -39,7 +40,7 @@ const Footer = () => {
                 />
               </a>
             </Button>
-            <p className="  text-muted-foreground text-base max-w-sm">
+            <p className="  text-muted-foreground text-base max-w-sm mb-3">
               {t('footer.description')}
             </p>
           </div>
@@ -55,7 +56,18 @@ const Footer = () => {
                 >
                   <Phone className="size-5 text-primary" />
                   <span dir="ltr" className="text-sm">
-                    +972 599 888 009
+                    +970597559922
+                  </span>
+                </a>
+              </li>
+              <li className="flex items-center gap-3 lg:justify-start">
+                <a
+                  href="tel:+972599888009"
+                  className="flex items-center gap-3 hover:text-primary transition-colors"
+                >
+                  <PhoneForwarded className="size-5 text-primary group-hover:scale-110 transition-transform" />
+                  <span dir="ltr" className="text-sm">
+                    022989520
                   </span>
                 </a>
               </li>
@@ -76,12 +88,15 @@ const Footer = () => {
                   className="flex items-center gap-3 hover:text-primary transition-colors"
                 >
                   <MapPin className="size-5 text-primary" />
-                  <span className="text-sm">Irsal street, Ramallah</span>
+                  <span className="text-sm">
+                    {' '}
+                    Ramallah, Al-Irsal St, Al-Israa Building
+                  </span>
                 </a>
               </li>
             </ul>
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-1 mt-4">
             <h3 className="font-bold text-xl text-foreground">
               {t('footer.followUs')}
             </h3>

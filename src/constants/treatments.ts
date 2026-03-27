@@ -1,19 +1,17 @@
-
 export const treatmentsPargraph = {
   en: {
-    Title: 'Advanced Dental Solutions',
+    Title: 'Our Services',
     Sub: 'Experience world-class dental care powered by modern technology and clinical expertise.',
   },
   ar: {
-    Title: 'حلول الأسنان المتقدمة',
-    Sub: 'تجربة رعاية أسنان عالمية المستوى مدعومة بالتكنولوجيا الحديثة والخبرة السريرية.',
+    Title: 'الخدمات',
+    Sub: 'أفضل تجربة سنية بأحدث التقنيات العالمية',
   },
 }
 export const treatments = [
   {
     id: 'general-dentistry',
-    image:
-      'https://www.sparkmedagency.com/IMG_5262.JPG%20(1).jpeg',
+    image: 'https://www.sparkmedagency.com/IMG_5262.JPG%20(1).jpeg',
     en: {
       title: 'General Dentistry',
       details:
@@ -23,14 +21,13 @@ export const treatments = [
     ar: {
       title: 'طب الأسنان العام',
       details:
-        'نقدم مجموعة متكاملة من علاجات طب الأسنان العام للحفاظ على صحة الأسنان واللثة، بما يشمل الفحوصات الدورية، علاج التسوس، علاجات العصب،  والحفاظ على صحة الفم بشكل عام.',
+        'نقدم مجموعة متكاملة من علاجات  الأسنان للحفاظ على صحة الأسنان واللثة، بما يشمل الفحوصات الدورية، علاج التسوس، علاجات العصب،  والحفاظ على صحة الفم .',
       tutorialLink: '#',
     },
   },
   {
     id: 'dental-implants',
-    image:
-      'https://www.sparkmedagency.com/IMG_5260.JPG.jpeg',
+    image: 'https://www.sparkmedagency.com/IMG_5260.JPG.jpeg',
     en: {
       title: 'Dental Implants',
       details:
@@ -46,8 +43,7 @@ export const treatments = [
   },
   {
     id: 'cosmetic-dentistry',
-    image:
-      'https://www.sparkmedagency.com/IMG_5265.JPG%20(2).jpeg',
+    image: 'https://www.sparkmedagency.com/IMG_5265.JPG%20(2).jpeg',
     en: {
       title: 'Cosmetic Dentistry',
       details:
@@ -63,8 +59,7 @@ export const treatments = [
   },
   {
     id: 'orthodontics',
-    image:
-      'https://www.sparkmedagency.com/IMG_5276.JPG.jpeg',
+    image: 'https://www.sparkmedagency.com/IMG_5276.JPG.jpeg',
     en: {
       title: 'Orthodontics',
       details:
@@ -80,8 +75,7 @@ export const treatments = [
   },
   {
     id: 'pediatric-dentistry',
-    image:
-      'https://www.sparkmedagency.com/IMG_5271.JPG.jpeg',
+    image: 'https://www.sparkmedagency.com/IMG_5271.JPG.jpeg',
     en: {
       title: 'Pediatric Dentistry',
       details:
@@ -91,14 +85,13 @@ export const treatments = [
     ar: {
       title: 'طب أسنان الأطفال',
       details:
-        'توفر العيادة عناية خاصة للأطفال ضمن بيئة مريحة تساعدهم على التخلص من الخوف من علاج الأسنان، كما يتوفر الغاز الضاحك لمساعدة الأطفال على الاسترخاء أثناء العلاج.',
+        'نوفّر عناية خاصة للأطفال ضمن بيئة مريحة تساعدهم على التخلص من الخوف من علاج الأسنان، كما يتوفر الغاز الضاحك لمساعدة الأطفال على الاسترخاء أثناء العلاج.',
       tutorialLink: '#pediatric',
     },
   },
   {
     id: 'gbt-cleaning',
-    image:
-      'https://www.sparkmedagency.com/IMG_5268.JPG.jpeg',
+    image: 'https://www.sparkmedagency.com/IMG_5268.JPG.jpeg',
     en: {
       title: 'Professional Teeth Cleaning – GBT',
       details:
@@ -115,8 +108,7 @@ export const treatments = [
   // 6. FLASH WHITENING
   {
     id: 'flash-whitening',
-    image:
-      'https://www.sparkmedagency.com/IMG_5266.JPG%20(3).jpeg',
+    image: 'https://www.sparkmedagency.com/IMG_5266.JPG%20(3).jpeg',
     en: {
       title: 'Teeth Whitening – Flash System',
       details:
@@ -125,15 +117,13 @@ export const treatments = [
     },
     ar: {
       title: 'تبييض الأسنان بجهاز Flash',
-      details:
-        'تشمل الإجراءات الجراحية المتعلقة بالفم والأسنان وعظام الفك، مثل خلع الأسنان الجراحية وبعض العلاجات المتقدمة.',
+      details:'تبييض الأسنان يتم باستخدام جهاز فلاش الحديث، الذي يبيض الأسنان بأمان وفعالية، ويمنح ابتسامتك لمعانًا وحيوية.',
       tutorialLink: '#',
     },
   },
   {
     id: 'oral-surgery',
-    image:
-      'https://www.sparkmedagency.com/IMG_5278.JPG.jpeg',
+    image: 'https://www.sparkmedagency.com/IMG_5278.JPG.jpeg',
     en: {
       title: 'Oral & Maxillofacial Surgery',
       details:
@@ -149,8 +139,7 @@ export const treatments = [
   },
   {
     id: 'general-anesthesia',
-    image:
-      'https://www.sparkmedagency.com/IMG_5272.JPG.jpeg',
+    image: 'https://www.sparkmedagency.com/IMG_5272.JPG.jpeg',
     en: {
       title: 'Dental Treatment Under General Anesthesia',
       details:

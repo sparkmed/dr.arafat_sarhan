@@ -10,7 +10,10 @@
     "contact": "Contact us",
     "Menu": "Menu",
     "Choose Language": "Choose Language",
-    "Choose Theme": "Choose Theme"
+    "Choose Theme": "Choose Theme",
+    "findUs": "Find Us",
+    "ourVibes": "Vibes",
+    "reviews": "Reviews"
   },
   "footer": {
     "description": "Your trusted dental care provider, committed to giving you the perfect smile with state-of-the-art technology and compassionate service.",
@@ -71,7 +74,7 @@
   "findUs": {
     "findusTitle": "Find Us",
     "title": "We Look Forward to Your Visit",
-    "description": "Visit us at our state-of-the-art clinic, designed to ensure a comfortable experience and a perfect smile in a peaceful and private atmosphere.",
+    "description": "Visit us for a comfortable experience and a perfect smile.",
     "locationTitle": "Our Location",
     "address": "Ramallah, Al-Irsal St, Al-Israa Building, 2nd Floor",
     "callUs": "Call Us",
@@ -83,7 +86,24 @@
   },
   "reviews": {
     "badge": "Real Reviews",
-    "title": "Voices We Cherish",
+    "title": "Reviews",
     "description": "We strive for excellence in every smile. Here is what our patients have to say about their journey with us."
+  },
+  "comparison": {
+    "title": "Before & After",
+    "badge": "Transformations We Pride In",
+    "description": "Our results combine precision, beauty, safety, and lasting effect.",
+    "instruction": "Slide to reveal the transformation",
+    "labels": {
+      "before": "Before",
+      "after": "After"
+    }
+  },
+  "vibes": {
+    "title": "Our Vibes",
+    "description": "Moments that reflect our values: dedication to patients, precision in practice, and a commitment to global advancement.",
+    "instruction": "Drag the photos to explore our memories",
+    "allYour": "All Your",
+    "memories": "Memories"
   }
 }

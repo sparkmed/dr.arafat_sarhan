@@ -7,8 +7,6 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
-  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -22,10 +20,11 @@ const StickyHeader = () => {
 
   const navItems = [
     { label: t('nav.home'), href: '#' },
-    { label: t('nav.services'), href: '#services' },
-    { label: t('nav.works'), href: '#works' },
+    { label: t('nav.services'), href:  "#our-services" },
     { label: t('nav.beforeAfter'), href: '#before-after' },
-    { label: t('nav.team'), href: '#team' },
+    { label: t('nav.ourVibes'), href: '#our-vibes' },
+    { label: t('nav.findUs'), href: '#find-us' },
+     { label: t('nav.reviews'), href: '#reviews' },
   ]
 
   useEffect(() => {

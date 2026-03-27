@@ -73,7 +73,7 @@ const Hero = () => {
             size="lg"
             className="rounded-full px-10 h-14 text-base font-medium hover:bg-primary/5"
           >
-            {t('common.services')}
+            <a href="#our-services">{t('common.services')}</a>
           </Button>
         </div>
       </div>
