@@ -149,11 +149,11 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className=" border-t border-[var(--line)] py-4">
+      <div className="border-t border-[var(--line)] py-4">
         <div className="page-wrap mx-auto px-6 flex justify-between items-center">
-          <p className=" text-sm text-muted-foreground">@2026</p>
-          <p className=" text-sm text-muted-foreground">
-            &copy; {t('footer.rights')}
+          <p className="text-sm text-muted-foreground">Powered by SparkMed</p>
+          <p className="text-sm text-muted-foreground">
+            &copy; 2026 {t('footer.rights')}
           </p>
         </div>
       </div>
