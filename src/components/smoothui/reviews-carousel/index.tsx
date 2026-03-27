@@ -180,7 +180,7 @@ export default function ReviewsCarousel({
         ))}
       </div>
 
-      <div className="absolute bottom-4 left-1/2 z-50 flex -translate-x-1/2 items-center gap-4">
+      <div dir="ltr" className="absolute bottom-4 left-1/2 z-50 flex -translate-x-1/2 items-center gap-4">
         <NavigationButton direction="prev" disabled={activeIndex === 0} onClick={goToPrevious} />
         
         <div className="flex gap-1.5">
