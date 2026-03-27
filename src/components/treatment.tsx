@@ -15,7 +15,7 @@ const direction = currentLanguage === 'ar' ? 'rtl' : 'ltr'
         <h2 className="text-pretty font-semibold text-2xl md:text-4xl tracking-[-0.03em] sm:mx-auto sm:max-w-xl sm:text-center md:text-[2.75rem] md:leading-[1.2]">
           {treatmentsPargraph[currentLanguage].Title}
         </h2>
-        <p className="mt-2 text-lg text-muted-foreground sm:text-center sm:text-xl">
+        <p className="mt-2 text-lg text-muted-foreground sm:text-center sm:text-3xl">
           {treatmentsPargraph[currentLanguage].Sub}
         </p>
         <div className="mx-auto mt-8 w-full space-y-20 md:mt-16">
@@ -37,7 +37,7 @@ const direction = currentLanguage === 'ar' ? 'rtl' : 'ltr'
                 <h4 className="my-3 font-semibold text-3xl tracking-[-0.02em]">
                   {treatment[currentLanguage].title}
                 </h4>
-                <p className="text-muted-foreground">
+                <p className="text-muted-foreground text-lg">
                   {treatment[currentLanguage].details}
                 </p>
                 {/* <Button asChild className="mt-6 gap-3 rounded-full" size="lg">

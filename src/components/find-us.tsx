@@ -8,8 +8,7 @@ const FindUs = () => {
   const isRTL = i18n.language.startsWith('ar')
 
   const mapUrl = 'https://share.google/WrOcvaHjPDGgmd3Tn'
-  const reviewUrl =
-    'https://g.page/r/CYtZyn5SYLSTEAI/review'
+  const reviewUrl = 'https://g.page/r/CYtZyn5SYLSTEAI/review'
 
   return (
     <section
@@ -52,22 +51,27 @@ const FindUs = () => {
               </div>
             </div>
 
-            <div className="flex items-center gap-4 p-5 rounded-2xl bg-card border border-border transition-all hover:border-primary/50">
-              <div className="p-3 bg-primary/10 rounded-xl text-primary shrink-0">
+            <a
+              href="tel:+970597559922"
+              className="group flex items-center gap-4 p-5 rounded-2xl bg-card border border-border transition-all hover:border-primary/50 hover:shadow-md active:scale-[0.98]"
+            >
+              {/* Icon Container */}
+              <div className="p-3 bg-primary/10 rounded-xl text-primary shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                 <Phone size={24} />
               </div>
+
+              {/* Text Content */}
               <div>
-                <p className="font-bold text-lg mb-1">{t('findUs.callUs')}</p>
-                <a
-                  href="tel:+972599888009"
-                  className="flex items-center gap-3 hover:text-primary transition-colors text-muted-foreground"
-                >
+                <p className="font-bold text-lg mb-1 group-hover:text-primary transition-colors">
+                  {t('findUs.callUs')}
+                </p>
+                <div className="flex items-center gap-3 text-muted-foreground">
                   <span dir="ltr" className="font-mono text-lg font-medium">
-                    +972 599 888 009
+                  +970 597 55 99 22
                   </span>
-                </a>
+                </div>
               </div>
-            </div>
+            </a>
 
             <div className="flex items-start gap-4 p-5 rounded-2xl bg-card border border-border">
               <div className="p-3 bg-primary/10 rounded-xl text-primary shrink-0">

@@ -1,9 +1,9 @@
 "use client";
-;
-import { cn } from "#/lib/utils";
+
+import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useCallback } from "react";
 
 const FRAME_OFFSET = -30;
 const FRAMES_VISIBLE_LENGTH = 3;
@@ -35,12 +35,22 @@ function ReviewCard({
   const shouldReduceMotion = useReducedMotion();
   const offsetIndex = index - activeIndex;
 
-  // Same logic as time-machine
-  const blur = activeIndex > index ? 2 : 0;
-  const opacity = activeIndex > index ? 0 : 1;
+  // الحسابات الخاصة بالشفافية والظهور
+  // الكرت النشط = 1، الكروت التالية تتلاشى تدريجياً، الكروت السابقة تختفي
+  const opacity = index === activeIndex 
+    ? 1 
+    : index > activeIndex 
+      ? clamp(1 - offsetIndex * 0.4, [0, 1]) 
+      : 0;
+
+  const blur = activeIndex > index ? 4 : 0;
+  
   const scale = shouldReduceMotion
     ? 1
-    : clamp(1 - offsetIndex * 0.08, [0.08, 2]);
+    : index >= activeIndex 
+      ? clamp(1 - offsetIndex * 0.05, [0.85, 1]) 
+      : 1.05;
+
   const y = shouldReduceMotion
     ? 0
     : clamp(offsetIndex * FRAME_OFFSET, [
@@ -55,84 +65,69 @@ function ReviewCard({
       animate={{
         y,
         scale,
+        opacity,
         transition: {
           type: "spring",
-          stiffness: 250,
-          damping: 20,
+          stiffness: 260,
+          damping: 25,
           mass: 0.5,
-          duration: 0.25,
         },
       }}
       className={cn(
-        "absolute left-1/2 w-[calc(100%-2rem)] max-w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-foreground/10 bg-background/80 p-4 shadow-lg backdrop-blur-md sm:p-6"
+        "absolute left-1/2 w-[calc(100%-2rem)] max-w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-foreground/10 bg-background/80 p-5 shadow-xl backdrop-blur-md sm:p-6"
       )}
       initial={false}
       style={{
         borderWidth: 1 / scale,
         willChange: "opacity, filter, transform",
         filter: `blur(${blur}px)`,
-        opacity,
-        transitionProperty: "opacity, filter",
-        transitionDuration: shouldReduceMotion ? "0ms" : "250ms",
-        transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
         zIndex: totalCards - index,
         pointerEvents: isActive ? "auto" : "none",
-        top: "50%", // Centrar verticalmente
+        top: "50%",
       }}
     >
       <blockquote className="relative">
-        <div className="absolute -top-1 -left-2 text-4xl text-foreground/10 leading-none dark:text-foreground/5">
+        <div className="absolute -top-2 -left-3 text-5xl text-foreground/5 leading-none select-none">
           "
         </div>
-        <p className="relative text-white/80 text-sm leading-relaxed">
+        <p className="relative text-foreground text-sm leading-relaxed italic">
           {review.body}
         </p>
       </blockquote>
       <figcaption className="mt-4 flex items-center gap-2 border-foreground/5 border-t pt-4">
         <div className="flex flex-col">
-          <span className="font-semibold text-foreground text-xs">
+          <span className="font-bold text-foreground text-sm">
             {review.author}
           </span>
-          <span className="text-foreground/50 text-xs">{review.title}</span>
+          <span className="text-muted-foreground text-xs">{review.title}</span>
         </div>
       </figcaption>
     </motion.figure>
   );
 }
 
-interface NavigationButtonProps {
-  direction: "prev" | "next";
-  onClick: () => void;
-  disabled: boolean;
-}
-
 function NavigationButton({
   direction,
   onClick,
   disabled,
-}: NavigationButtonProps) {
+}: {
+  direction: "prev" | "next";
+  onClick: () => void;
+  disabled: boolean;
+}) {
   const Icon = direction === "prev" ? ChevronLeft : ChevronRight;
 
   return (
     <button
-      aria-label={direction === "prev" ? "Anterior" : "Siguiente"}
       className={cn(
-        "box-gen group relative z-0 flex h-7 w-7 items-center justify-center rounded-full border-[0.5px] border-foreground/10 bg-background/50 backdrop-blur-sm transition-all duration-200",
-        disabled
-          ? "cursor-not-allowed opacity-30"
-          : "cursor-pointer hover:border-foreground/20 hover:bg-background/70 hover:shadow-lg",
-        "dark:border-foreground/5 dark:bg-foreground/5 dark:hover:border-foreground/10 dark:hover:bg-foreground/10"
+        "flex h-9 w-9 items-center justify-center rounded-full border border-foreground/10 bg-background/50 backdrop-blur-sm transition-all active:scale-90",
+        disabled ? "opacity-20 cursor-not-allowed" : "hover:bg-background/80 hover:border-primary/50"
       )}
       disabled={disabled}
       onClick={onClick}
       type="button"
     >
-      <Icon
-        className={cn(
-          "h-3.5 w-3.5 text-foreground/60 transition-colors",
-          "group-hover:text-foreground group-disabled:text-foreground/20"
-        )}
-      />
+      <Icon className="h-4 w-4" />
     </button>
   );
 }
@@ -141,9 +136,6 @@ export interface ReviewsCarouselProps {
   reviews: Review[];
   className?: string;
   height?: string;
-  excludeIds?: (string | number)[];
-  showIndicators?: boolean;
-  showNavigation?: boolean;
   autoPlay?: boolean;
   autoPlayInterval?: number;
 }
@@ -151,150 +143,61 @@ export interface ReviewsCarouselProps {
 export default function ReviewsCarousel({
   reviews,
   className = "",
-  height = "300px",
-  excludeIds = [],
-  showIndicators = true,
-  showNavigation = true,
+  height = "380px",
   autoPlay = false,
   autoPlayInterval = 5000,
 }: ReviewsCarouselProps) {
-  // Filter out excluded reviews - use Set for O(1) lookups
-  const filteredReviews = useMemo(() => {
-    if (excludeIds.length === 0) {
-      return reviews;
-    }
-
-    const excludeSet = new Set(excludeIds);
-    const reviewsLength = reviews.length;
-    const results: typeof reviews = [];
-
-    // Use for loop for better performance
-    for (let i = 0; i < reviewsLength; i++) {
-      const review = reviews[i];
-      if (!excludeSet.has(review.id)) {
-        results.push(review);
-      }
-    }
-
-    return results;
-  }, [reviews, excludeIds]);
-
-  const maxIndex = filteredReviews.length - 1;
   const [activeIndex, setActiveIndex] = useState(0);
+  const maxIndex = reviews.length - 1;
 
-  // Auto-play functionality
-  useEffect(() => {
-    if (!autoPlay || maxIndex < 0) {
-      return;
-    }
+  const goToPrevious = useCallback(() => {
+    setActiveIndex((i) => (i > 0 ? i - 1 : i));
+  }, []);
 
-    const interval = setInterval(() => {
-      setActiveIndex((prevIndex) => {
-        if (prevIndex >= maxIndex) {
-          return 0;
-        }
-        return prevIndex + 1;
-      });
-    }, autoPlayInterval);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [autoPlay, autoPlayInterval, maxIndex]);
-
-  // Keyboard navigation
-  useEffect(() => {
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "ArrowLeft") {
-        setActiveIndex((i) => clamp(i - 1, [0, maxIndex]));
-      } else if (event.key === "ArrowRight") {
-        setActiveIndex((i) => clamp(i + 1, [0, maxIndex]));
-      }
-    }
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
+  const goToNext = useCallback(() => {
+    setActiveIndex((i) => (i < maxIndex ? i + 1 : i));
   }, [maxIndex]);
 
-  const goToPrevious = () => {
-    setActiveIndex((prevIndex) => {
-      if (prevIndex > 0) {
-        return prevIndex - 1;
-      }
-      return prevIndex;
-    });
-  };
-
-  const goToNext = () => {
-    setActiveIndex((prevIndex) => {
-      const newIndex = prevIndex + 1;
-      return newIndex <= maxIndex ? newIndex : prevIndex;
-    });
-  };
-
-  if (filteredReviews.length === 0) {
-    return null;
-  }
+  useEffect(() => {
+    if (!autoPlay) return;
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+    }, autoPlayInterval);
+    return () => clearInterval(interval);
+  }, [autoPlay, autoPlayInterval, maxIndex]);
 
   return (
-    <div
-      className={cn("relative mx-auto w-full max-w-4xl", className)}
-      style={{ height }}
-    >
-      <div className="relative h-full w-full py-8">
-        <div className="grid h-full w-full place-items-center">
-          {filteredReviews.map((review: Review, index: number) => (
-            <ReviewCard
-              activeIndex={activeIndex}
-              index={index}
-              key={review.id}
-              review={review}
-              totalCards={filteredReviews.length}
+    <div className={cn("relative mx-auto w-full max-w-4xl", className)} style={{ height }}>
+      <div className="relative h-full w-full">
+        {reviews.map((review, index) => (
+          <ReviewCard
+            activeIndex={activeIndex}
+            index={index}
+            key={review.id}
+            review={review}
+            totalCards={reviews.length}
+          />
+        ))}
+      </div>
+
+      <div className="absolute bottom-4 left-1/2 z-50 flex -translate-x-1/2 items-center gap-4">
+        <NavigationButton direction="prev" disabled={activeIndex === 0} onClick={goToPrevious} />
+        
+        <div className="flex gap-1.5">
+          {reviews.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveIndex(index)}
+              className={cn(
+                "h-1.5 rounded-full transition-all duration-300",
+                index === activeIndex ? "w-6 bg-primary" : "w-1.5 bg-primary/20"
+              )}
             />
           ))}
         </div>
-      </div>
 
-      {(showNavigation || showIndicators) && (
-        <div dir="ltr" className="absolute bottom-4 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2">
-          {showNavigation && (
-            <NavigationButton
-              direction="prev"
-              disabled={activeIndex <= 0}
-              onClick={goToPrevious}
-            />
-          )}
-          {showIndicators && (
-            <div className="flex items-center gap-2">
-              {filteredReviews.map((review: Review, index: number) => (
-                <button
-                  aria-label={`Ir al testimonio ${index + 1}`}
-                  className={cn(
-                    "h-2 rounded-full transition-all duration-200",
-                    index === activeIndex
-                      ? "w-8 bg-secondary"
-                      : "w-2 bg-secondary/30 hover:bg-secondary/50"
-                  )}
-                  key={review.id}
-                  onClick={() => {
-                    setActiveIndex(index);
-                  }}
-                  type="button"
-                />
-              ))}
-            </div>
-          )}
-          {showNavigation && (
-            <NavigationButton
-              direction="next"
-              disabled={activeIndex === maxIndex}
-              onClick={goToNext}
-            />
-          )}
-        </div>
-      )}
+        <NavigationButton direction="next" disabled={activeIndex === maxIndex} onClick={goToNext} />
+      </div>
     </div>
   );
 }
