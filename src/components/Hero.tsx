@@ -80,9 +80,13 @@ const Hero = () => {
           </Button>
         </div>
       </div>
-      <div className=" ">
-        <div className="relative rounded-3xl overflow-hidden shadow-2xl rotate-0 hover:rotate-1 transition-transform duration-200">
-          <PixelImage customGrid={{ rows: 1, cols: 6 }} src={data.image} />
+      <div className="w-full max-w-[18rem] shrink-0 sm:max-w-sm md:max-w-md lg:w-1/2 lg:max-w-md xl:max-w-lg">
+        <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl rotate-0 hover:rotate-1 transition-transform duration-200">
+          <PixelImage
+            className="aspect-[2/3] w-full"
+            customGrid={{ rows: 1, cols: 6 }}
+            src={data.image}
+          />
         </div>
       </div>
     </div>

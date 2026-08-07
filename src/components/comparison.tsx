@@ -10,15 +10,12 @@ import {
 } from '@/components/kibo-ui/comparison'
 import EmblaOpacity from '@/components/ui/Carousel/embla-opacity/embla-opacity'
 import { Button } from '#/components/ui/button'
-import { useIsMobile } from '#/hooks/use-mobile'
 import { useSection } from '#/hooks/use-site-content'
 
 const ComparisonCarousel = () => {
   const { data, t } = useSection('beforeAfter')
-  const [isDraggingSlider, setIsDraggingSlider] = useState(false)
   const [emblaApi, setEmblaApi] = useState<EmblaCarouselType | undefined>()
   const [selectedIndex, setSelectedIndex] = useState(0)
-  const isMobile = useIsMobile()
 
   const onApiChange = useCallback(
     (api: EmblaCarouselType | undefined) => setEmblaApi(api),
@@ -70,11 +67,7 @@ const ComparisonCarousel = () => {
             className="shrink-0 grow-0 basis-[90%] md:basis-3/4 min-w-0 pl-4"
           >
             <div className="relative rounded-2xl overflow-hidden border shadow-xl bg-muted">
-              <Comparison
-                className="aspect-video"
-                onDragStart={() => setIsDraggingSlider(true)}
-                onDragEnd={() => setIsDraggingSlider(false)}
-              >
+              <Comparison className="aspect-video">
                 {/* Before Side */}
                 <ComparisonItem position="right">
                   <img

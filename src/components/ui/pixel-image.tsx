@@ -25,6 +25,8 @@ interface PixelImageProps {
   pixelFadeInDuration?: number // in ms
   maxAnimationDelay?: number // in ms
   colorRevealDelay?: number // in ms
+  /** Sizes the frame. Give it a width and an aspect ratio, e.g. `w-full aspect-[2/3]`. */
+  className?: string
 }
 
 export const PixelImage = ({
@@ -35,6 +37,7 @@ export const PixelImage = ({
   maxAnimationDelay = 1200,
   colorRevealDelay = 1300,
   customGrid,
+  className,
 }: PixelImageProps) => {
   const [isVisible, setIsVisible] = useState(false)
   const [showColor, setShowColor] = useState(false)
@@ -89,7 +92,14 @@ export const PixelImage = ({
   }, [rows, cols, maxAnimationDelay])
 
   return (
-    <div className="relative h-72 w-72 select-none md:h-230 md:w-2xl lg:w-3xl  overflow-hidden rounded-[2.5rem]">
+    <div
+      className={cn(
+        "relative select-none overflow-hidden rounded-[2.5rem]",
+        // Callers own the dimensions; this is the fallback when none are given.
+        "aspect-[2/3] w-full",
+        className
+      )}
+    >
       {pieces.map((piece, index) => (
         <div
           key={index}
@@ -107,7 +117,10 @@ export const PixelImage = ({
             src={src}
             alt={`Pixel image piece ${index + 1}`}
             className={cn(
-              "z-1 rounded-[2.5rem] object-cover",
+              // Without these the img renders at its intrinsic size and is
+              // merely clipped, so the frame shows a zoomed crop instead of
+              // the whole photo.
+              "absolute inset-0 z-1 h-full w-full rounded-[2.5rem] object-cover",
               grayscaleAnimation && (showColor ? "grayscale-0" : "grayscale")
             )}
             style={{
