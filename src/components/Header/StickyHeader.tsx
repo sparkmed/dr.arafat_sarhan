@@ -23,6 +23,7 @@ const StickyHeader = () => {
     { label: t('nav.services'), href: '/#our-services' }, 
     { label: t('nav.beforeAfter'), href: '/#before-after' },
     { label: t('nav.ourVibes'), href: '/#our-vibes' },
+    { label: t('nav.team'), href: '/#team' },
     { label: t('nav.findUs'), href: '/#find-us' },
     { label: t('nav.reviews'), href: '/#reviews' },
   ]

@@ -1,22 +1,21 @@
-import { useTranslation } from 'react-i18next'
-import { Button } from '../ui/button'
 import {
   Facebook,
   Instagram,
   Mail,
   MapPin,
-  MessageCircle,
   Phone,
   PhoneForwarded,
-  Send,
 } from 'lucide-react'
-const darklogoURL =
-  'https://marvelous-fish-345.convex.cloud/api/storage/9d521bf6-d1e5-4138-b9d2-abe3173c7b86'
+import { Button } from '../ui/button'
+import { useSection } from '#/hooks/use-site-content'
 
-const lightLogoURL =
-  'https://marvelous-fish-345.convex.cloud/api/storage/bee39baa-a87f-4a8d-9ece-8ebd42041c24'
+const telHref = (value: string) => `tel:${value.replace(/[^\d+]/g, '')}`
+
 const Footer = () => {
-  const { t } = useTranslation()
+  const { data, t } = useSection('footer')
+
+  if (!data.enabled) return null
+
   return (
     <footer className="w-full mt-auto backdrop-blur-sm ">
       <div className="page-wrap mx-auto py-12 px-6">
@@ -29,76 +28,73 @@ const Footer = () => {
             >
               <a href="/">
                 <img
-                  src={darklogoURL}
+                  src={data.logoDark}
                   alt="Logo"
                   className=" hidden dark:block drop-shadow-[0_0_2px_rgba(0,0,0,0.6)]"
                 />
                 <img
-                  src={lightLogoURL}
+                  src={data.logoLight}
                   alt="Logo"
                   className="drop-shadow-[0_0_2px_rgba(0,0,0,0.6)] dark:hidden"
                 />
               </a>
             </Button>
             <p className="  text-muted-foreground text-base max-w-sm mb-3">
-              {t('footer.description')}
+              {t(data.description)}
             </p>
           </div>
           <div className="flex flex-col gap-2 lg:items-start">
             <h3 className="font-bold text-2xl text-foreground ">
-              {t('footer.contactUs')}
+              {t(data.contactTitle)}
             </h3>
             <ul className="space-y-4 text-muted-foreground pt-3">
               <li className="flex items-center gap-3 lg:justify-start">
                 <a
-                  href="tel:+972599888009"
+                  href={telHref(data.phonePrimary)}
                   className="flex items-center gap-3 hover:text-primary transition-colors"
                 >
                   <Phone className="size-5 text-primary" />
                   <span dir="ltr" className="text-sm">
-                    +970597559922
+                    {data.phonePrimary}
                   </span>
                 </a>
               </li>
               <li className="flex items-center gap-3 lg:justify-start">
                 <a
-                  href="tel:+972599888009"
+                  href={telHref(data.phoneSecondary)}
                   className="flex items-center gap-3 hover:text-primary transition-colors"
                 >
                   <PhoneForwarded className="size-5 text-primary group-hover:scale-110 transition-transform" />
                   <span dir="ltr" className="text-sm">
-                    022989520
+                    {data.phoneSecondary}
                   </span>
                 </a>
               </li>
               <li className="flex items-center gap-3 lg:justify-start">
                 <a
-                  href="mailto:info@drarafatsarhan.com"
+                  href={`mailto:${data.email}`}
                   className="flex items-center gap-3 hover:text-primary transition-colors"
                 >
                   <Mail className="size-5 text-primary" />
-                  <span className="text-sm">info@drarafatsarhan.com</span>
+                  <span className="text-sm">{data.email}</span>
                 </a>
               </li>
               <li className="flex items-center gap-3 lg:justify-start">
                 <a
-                  href="https://maps.google.com/?cid=10643237726814099851&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ"
+                  href={data.addressUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 hover:text-primary transition-colors"
                 >
                   <MapPin className="size-5 text-primary" />
-                  <span className="text-sm">
-                    {' '}
-                    Ramallah, Al-Irsal St, Al-Israa Building
-                  </span>
+                  <span className="text-sm">{t(data.address)}</span>
                 </a>
               </li>
             </ul>
           </div>
           <div className="flex flex-col gap-1 mt-4">
             <h3 className="font-bold text-xl text-foreground">
-              {t('footer.followUs')}
+              {t(data.followTitle)}
             </h3>
             <div className="flex items-center gap-4 pt-2">
               {/* Instagram */}
@@ -109,7 +105,7 @@ const Footer = () => {
                 asChild
               >
                 <a
-                  href="https://www.instagram.com/drarafatsarhan"
+                  href={data.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -125,7 +121,7 @@ const Footer = () => {
                 asChild
               >
                 <a
-                  href="https://www.facebook.com/DrArafatSarhan"
+                  href={data.facebookUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -140,7 +136,7 @@ const Footer = () => {
                 className="rounded-full hover:text-primary transition-colors"
                 asChild
               >
-                <a href="mailto:info@drarafatsarhan.com">
+                <a href={`mailto:${data.email}`}>
                   <Mail className="size-5" />
                 </a>
               </Button>
@@ -153,7 +149,7 @@ const Footer = () => {
         <div className="page-wrap mx-auto px-6 flex justify-between items-center">
           <p className="text-sm text-muted-foreground">Powered by SparkMed</p>
           <p className="text-sm text-muted-foreground">
-            &copy; 2026 {t('footer.rights')}
+            &copy; 2026 {t(data.rights)}
           </p>
         </div>
       </div>

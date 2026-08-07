@@ -1,36 +1,32 @@
-import React from 'react'
-import { MapPin, Phone, Clock, ExternalLink, Star } from 'lucide-react'
+import { Clock, ExternalLink, MapPin, Phone, Star } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { useTranslation } from 'react-i18next'
+import { useSection } from '#/hooks/use-site-content'
 
 const FindUs = () => {
-  const { t, i18n } = useTranslation()
-  const isRTL = i18n.language.startsWith('ar')
+  const { data, t, dir, isRTL } = useSection('findUs')
 
-  const mapUrl = 'https://share.google/WrOcvaHjPDGgmd3Tn'
-  const reviewUrl = 'https://g.page/r/CYtZyn5SYLSTEAI/review'
+  if (!data.enabled) return null
+
+  const telHref = `tel:${data.phone.replace(/[^\d+]/g, '')}`
 
   return (
-    <section
-      className="py-20 px-4 max-w-7xl mx-auto "
-      dir={isRTL ? 'rtl' : 'ltr'}
-    >
+    <section className="py-20 px-4 max-w-7xl mx-auto " dir={dir}>
       <div className="flex items-center justify-center w-full py-4 pb-12 text-center">
         <div className="flex flex-col gap-y-3">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground font-serif leading-tight">
-            {t('findUs.findusTitle')}
+            {t(data.title)}
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed">
-            {t('findUs.description')}
+            {t(data.description)}
           </p>
-          <div className={`flex justify-center ${isRTL ? 'rtl' : 'ltr'}`}>
+          <div className={`flex justify-center ${dir}`}>
             <Button
-              onClick={() => window.open(reviewUrl, '_blank')}
+              onClick={() => window.open(data.reviewUrl, '_blank')}
               variant="outline"
               className="rounded-full px-6 h-12 flex gap-2 border-primary/20 bg-card text-foreground hover:bg-primary/5 shadow-md"
             >
               <Star size={18} className="text-yellow-500 fill-yellow-500" />
-              {t('findUs.addReview')}
+              {t(data.addReviewLabel)}
             </Button>
           </div>
         </div>
@@ -46,13 +42,13 @@ const FindUs = () => {
                 <MapPin size={24} />
               </div>
               <div>
-                <p className="font-bold text-lg">{t('findUs.locationTitle')}</p>
-                <p className="text-muted-foreground">{t('findUs.address')}</p>
+                <p className="font-bold text-lg">{t(data.locationTitle)}</p>
+                <p className="text-muted-foreground">{t(data.address)}</p>
               </div>
             </div>
 
             <a
-              href="tel:+970597559922"
+              href={telHref}
               className="group flex items-center gap-4 p-5 rounded-2xl bg-card border border-border transition-all hover:border-primary/50 hover:shadow-md active:scale-[0.98]"
             >
               {/* Icon Container */}
@@ -63,11 +59,11 @@ const FindUs = () => {
               {/* Text Content */}
               <div>
                 <p className="font-bold text-lg mb-1 group-hover:text-primary transition-colors">
-                  {t('findUs.callUs')}
+                  {t(data.callUsLabel)}
                 </p>
                 <div className="flex items-center gap-3 text-muted-foreground">
                   <span dir="ltr" className="font-mono text-lg font-medium">
-                  +970 597 55 99 22
+                    {data.phone}
                   </span>
                 </div>
               </div>
@@ -78,11 +74,11 @@ const FindUs = () => {
                 <Clock size={24} />
               </div>
               <div>
-                <p className="font-bold text-lg">{t('findUs.hoursTitle')}</p>
+                <p className="font-bold text-lg">{t(data.hoursTitle)}</p>
                 <div className="text-muted-foreground text-sm mt-1">
-                  <p>{t('findUs.hoursDetail')}</p>
+                  <p>{t(data.hoursDetail)}</p>
                   <p className="text-destructive mt-1 font-medium">
-                    {t('findUs.closed')}
+                    {t(data.closed)}
                   </p>
                 </div>
               </div>
@@ -94,7 +90,8 @@ const FindUs = () => {
         <div className="order-2 flex flex-col gap-6">
           <div className="group relative rounded-[3rem] overflow-hidden shadow-2xl flex-grow border-8 border-white dark:border-card min-h-[400px]">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3389.544766981881!2d35.2033!3d31.906!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDU0JzIyLjIiTiAzNcKwMTInMTEuOSJF!5e0!3m2!1sen!2s!4v1711410000000!5m2!1sen!2s"
+              src={data.mapEmbedUrl}
+              title={t(data.locationTitle)}
               className="w-full h-full grayscale hover:grayscale-0 transition-all duration-700 pointer-events-auto"
               style={{ border: 0 }}
               allowFullScreen
@@ -104,10 +101,10 @@ const FindUs = () => {
 
             <div className="absolute bottom-6 right-6 left-6">
               <Button
-                onClick={() => window.open(mapUrl, '_blank')}
+                onClick={() => window.open(data.mapUrl, '_blank')}
                 className="w-full rounded-full h-14 bg-primary text-white hover:scale-[1.02] transition-transform shadow-xl font-bold text-lg gap-2"
               >
-                {t('findUs.openMap')}
+                {t(data.openMapLabel)}
                 <ExternalLink size={20} />
               </Button>
             </div>

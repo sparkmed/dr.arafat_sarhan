@@ -1,65 +1,48 @@
 'use client'
 
+import { useState } from 'react'
 import {
   Comparison,
   ComparisonHandle,
   ComparisonItem,
 } from '@/components/kibo-ui/comparison'
 import EmblaOpacity from '@/components/ui/Carousel/embla-opacity/embla-opacity'
-import { useTranslation } from 'react-i18next'
-import { useState } from 'react'
-
-const cases = [
-  {
-    id: 1,
-    before: 'https://www.sparkmedagency.com/before_1.jpg',
-    after: 'https://www.sparkmedagency.com/after_1.jpg',
-  },
-  {
-    id: 2,
-    before: 'https://www.sparkmedagency.com/Impalnt_before.jpg',
-    after: 'https://www.sparkmedagency.com/Implant_Afterjpg.jpg',
-  },
-  {
-    id: 3,
-    before: 'https://www.sparkmedagency.com/Implant_before_1jpg.jpg',
-    after: 'https://www.sparkmedagency.com/implant_after_1.jpg',
-  },
-]
+import { useSection } from '#/hooks/use-site-content'
 
 const ComparisonCarousel = () => {
-  const { t } = useTranslation()
+  const { data, t } = useSection('beforeAfter')
   const [isDraggingSlider, setIsDraggingSlider] = useState(false)
+
+  if (!data.enabled || data.cases.length === 0) return null
 
   return (
     <section className="w-full max-w-6xl mx-auto py-12 px-4">
       {/* Header */}
       <div className="text-center mb-10 space-y-3">
         <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-          {t('comparison.title')}
+          {t(data.title)}
         </h2>
         <p className="max-w-2xl mx-auto text-muted-foreground leading-relaxed">
-          {t('comparison.description')}
+          {t(data.description)}
         </p>
-        
       </div>
 
       {/* The Carousel */}
       <EmblaOpacity
-        disabledControls={cases.length <= 1}
-        options={{ 
-            loop: true, 
-            // Crucial: Disable carousel dragging if the user is sliding the Before/After handle
-            watchDrag: !isDraggingSlider && cases.length > 1 
+        disabledControls={data.cases.length <= 1}
+        options={{
+          loop: true,
+          // Crucial: Disable carousel dragging if the user is sliding the Before/After handle
+          watchDrag: !isDraggingSlider && data.cases.length > 1,
         }}
       >
-        {cases.map((caseItem) => (
+        {data.cases.map((caseItem) => (
           <div
             key={caseItem.id}
             className="shrink-0 grow-0 basis-[90%] md:basis-3/4 min-w-0 pl-4"
           >
             <div className="relative rounded-2xl overflow-hidden border shadow-xl bg-muted">
-              <Comparison 
+              <Comparison
                 className="aspect-video"
                 onDragStart={() => setIsDraggingSlider(true)}
                 onDragEnd={() => setIsDraggingSlider(false)}
@@ -73,7 +56,7 @@ const ComparisonCarousel = () => {
                   />
                   <div className="absolute bottom-4 left-4 z-20 pointer-events-none">
                     <span className="bg-black/60 backdrop-blur-sm text-white px-3 py-1 rounded text-xs font-semibold">
-                      {t('comparison.labels.before')}
+                      {t(data.beforeLabel)}
                     </span>
                   </div>
                 </ComparisonItem>
@@ -87,7 +70,7 @@ const ComparisonCarousel = () => {
                   />
                   <div className="absolute bottom-4 right-4 z-20 pointer-events-none">
                     <span className="bg-white/80 backdrop-blur-sm text-black px-3 py-1 rounded text-xs font-semibold">
-                      {t('comparison.labels.after')}
+                      {t(data.afterLabel)}
                     </span>
                   </div>
                 </ComparisonItem>

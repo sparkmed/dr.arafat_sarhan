@@ -9,6 +9,12 @@ pnpm install
 pnpm dev
 ```
 
+# Content management
+
+The landing page is edited at `/admin`, backed by Convex with image uploads to
+Cloudflare R2. Setup (admin passcode, R2 credentials, bucket CORS) and usage are
+documented in [docs/CMS.md](./docs/CMS.md).
+
 # Building For Production
 
 To build this application for production:

@@ -10,16 +10,25 @@ import { BokehBackground } from '#/components/ui/bokeh'
 import FindUs from '#/components/find-us'
 import Reviews from '#/components/reviews'
 import ComparisonCom from '#/components/comparison'
+import Team from '#/components/team'
+import { useSection } from '#/hooks/use-site-content'
 
 export const Route = createFileRoute('/')({ component: App })
 
-const OPTIONS = { loop: true }
+function Showcase() {
+  const { data } = useSection('showcase')
 
-const iphoneImages = [
-  'https://www.sparkmedagency.com/Dashboard.jpg',
-  'https://www.sparkmedagency.com/our-services.jpg',
-  'https://www.sparkmedagency.com/drarafatintro.jpg',
-]
+  if (!data.enabled || data.images.length === 0) return null
+
+  return (
+    <PhoneCarousel
+      images={data.images.map((image) => ({
+        src: image.url,
+        alt: image.alt || 'iPhone screen content',
+      }))}
+    />
+  )
+}
 
 function App() {
   return (
@@ -42,12 +51,7 @@ function App() {
 
             <div className=" flex flex-col gap-6 mb-4">
               <div dir="ltr" className="relative z-10 mt-4">
-                <PhoneCarousel
-                  images={iphoneImages.map((src) => ({
-                    src,
-                    alt: 'iPhone screen content',
-                  }))}
-                />
+                <Showcase />
                 <section id="our-services" className="scroll-mt-20">
                   <Treatment />
                 </section>
@@ -60,6 +64,9 @@ function App() {
                 >
                   <DragElementsComponent />
                 </div>
+                <section id="team" className="scroll-mt-20">
+                  <Team />
+                </section>
                 <div
                   className="page-wrap max-w-4xl  flex flex-row justify-center items-center"
                   id="find-us"

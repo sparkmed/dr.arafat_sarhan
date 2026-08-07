@@ -2,10 +2,13 @@ import { Link } from '@tanstack/react-router'
 import { Button } from './ui/button'
 import { Highlighter } from './ui/highlighter'
 import { PixelImage } from './ui/pixel-image'
-import { useTranslation } from 'react-i18next'
+import { useSection } from '#/hooks/use-site-content'
 
 const Hero = () => {
-  const { t } = useTranslation()
+  const { data, t } = useSection('hero')
+
+  if (!data.enabled) return null
+
   return (
     <div className="flex flex-col lg:flex-row items-center justify-between p-8 lg:p-16 bg-card border-border border-[1px] rounded-[2rem] shadow-sm gap-12 mx-4">
       <div className="flex flex-col items-center lg:items-start w-full lg:w-1/2 gap-y-8">
@@ -16,21 +19,19 @@ const Hero = () => {
             strokeWidth={3}
             padding={2}
           >
-            <span className="relative inline-block">{t('hero.title1')}</span>
+            <span className="relative inline-block">{t(data.title1)}</span>
           </Highlighter>
           <br />
-          <span className="relative text-primary italic">
-            {t('hero.title2')}
-          </span>
+          <span className="relative text-primary italic">{t(data.title2)}</span>
         </h1>
         <div className="space-y-6 text-center lg:text-start text-lg text-muted-foreground max-w-3xl leading-relaxed">
           <p>
             <Highlighter action="highlight" color="rgba(245, 158, 11, 0.15)">
               <span className="relative text-foreground font-semibold text-xl">
-                {t('hero.doctorName')}
+                {t(data.doctorName)}
               </span>
             </Highlighter>{' '}
-            {t('hero.doctorParagraph1')}{' '}
+            {t(data.paragraph1)}{' '}
             <Highlighter
               action="underline"
               color="#F59E0B"
@@ -38,16 +39,18 @@ const Hero = () => {
               padding={2}
             >
               <span className="text-foreground font-medium">
-                {t('hero.university')}{' '}
+                {t(data.university)}{' '}
               </span>
             </Highlighter>
-            {t('hero.doctorParagraph1_1')}
+            {t(data.paragraph1After)}
           </p>
 
-          <p className="hidden lg:block border-l-2 border-primary/20 pl-6 italic text-base">
-            " {t('hero.doctorQuote')}"
-          </p>
-          <p>{t('hero.doctorParagraph2')}</p>
+          {t(data.quote) ? (
+            <p className="hidden lg:block border-l-2 border-primary/20 pl-6 italic text-base">
+              " {t(data.quote)}"
+            </p>
+          ) : null}
+          <p>{t(data.paragraph2)}</p>
         </div>
 
         {/* Experience Badge */}
@@ -56,7 +59,7 @@ const Hero = () => {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
           </span>
-          {t('hero.clinicalExcellence')}
+          {t(data.badge)}
         </div>
 
         {/* Actions */}
@@ -66,23 +69,20 @@ const Hero = () => {
             size="lg"
             className="rounded-full px-10 h-14 text-base font-bold shadow-lg shadow-primary/20 hover:scale-105 transition-transform"
           >
-            <Link to="/bookappointment">{t('common.bookAppointment')}</Link>
+            <Link to="/bookappointment">{t(data.primaryCta)}</Link>
           </Button>
           <Button
             variant="outline"
             size="lg"
             className="rounded-full px-10 h-14 text-base font-medium hover:bg-primary/5"
           >
-            <a href="#our-services">{t('common.services')}</a>
+            <a href="#our-services">{t(data.secondaryCta)}</a>
           </Button>
         </div>
       </div>
       <div className=" ">
         <div className="relative rounded-3xl overflow-hidden shadow-2xl rotate-0 hover:rotate-1 transition-transform duration-200">
-          <PixelImage
-            customGrid={{ rows: 1, cols: 6 }}
-            src="https://www.sparkmedagency.com/IMG_0131.JPEG"
-          />
+          <PixelImage customGrid={{ rows: 1, cols: 6 }} src={data.image} />
         </div>
       </div>
     </div>
