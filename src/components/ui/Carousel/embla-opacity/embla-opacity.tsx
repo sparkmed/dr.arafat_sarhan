@@ -20,10 +20,19 @@ type PropType = {
   children: React.ReactNode;
   options?: EmblaOptionsType;
   disabledControls?: boolean;
+  /**
+   * Hands the Embla instance to the caller so it can render its own controls.
+   * Needed where the built-in arrows don't fit — they are hidden under 768px
+   * and overlay the slides, which conflicts with draggable slide content.
+   */
+  onApiChange?: (api: EmblaCarouselType | undefined) => void;
+  /** Drops the built-in overlay arrows, keeping the dots and autoplay. */
+  hideArrows?: boolean;
 };
 
 const EmblaCarousel: React.FC<PropType> = (props) => {
-  const { options, children, disabledControls } = props;
+  const { options, children, disabledControls, onApiChange, hideArrows } =
+    props;
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [
     Autoplay({
       delay: 4000, // change this with embla__dot--selected:before animation duration
@@ -88,6 +97,10 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   );
 
   useEffect(() => {
+    onApiChange?.(emblaApi);
+  }, [emblaApi, onApiChange]);
+
+  useEffect(() => {
     if (!emblaApi) return;
 
     setTweenFactor(emblaApi);
@@ -109,10 +122,18 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         className={styles.embla__controls}
         style={{ ...(disabledControls && { display: 'none' }) }}
       >
-        <div className={styles.embla__buttons}>
-          <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
-          <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
-        </div>
+        {!hideArrows && (
+          <div className={styles.embla__buttons}>
+            <PrevButton
+              onClick={onPrevButtonClick}
+              disabled={prevBtnDisabled}
+            />
+            <NextButton
+              onClick={onNextButtonClick}
+              disabled={nextBtnDisabled}
+            />
+          </div>
+        )}
 
         <div className={styles.embla__dots}>
           {scrollSnaps.map((_, index) => (

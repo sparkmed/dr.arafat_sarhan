@@ -29,7 +29,7 @@ function MemberCard({
             src={member.photo}
             alt={name}
             loading="lazy"
-            className="absolute inset-0 h-full w-full object-cover grayscale transition-all duration-500 ease-out group-hover:scale-105 group-hover:grayscale-0"
+            className="absolute inset-0 h-full w-full object-cover md:grayscale transition-all duration-500 ease-out group-hover:scale-105 group-hover:grayscale-0"
           />
         ) : null}
 

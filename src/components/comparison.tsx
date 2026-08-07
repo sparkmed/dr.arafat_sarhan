@@ -1,19 +1,43 @@
 'use client'
 
-import { useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+import type { EmblaCarouselType } from 'embla-carousel'
 import {
   Comparison,
   ComparisonHandle,
   ComparisonItem,
 } from '@/components/kibo-ui/comparison'
 import EmblaOpacity from '@/components/ui/Carousel/embla-opacity/embla-opacity'
+import { Button } from '#/components/ui/button'
+import { useIsMobile } from '#/hooks/use-mobile'
 import { useSection } from '#/hooks/use-site-content'
 
 const ComparisonCarousel = () => {
   const { data, t } = useSection('beforeAfter')
   const [isDraggingSlider, setIsDraggingSlider] = useState(false)
+  const [emblaApi, setEmblaApi] = useState<EmblaCarouselType | undefined>()
+  const [selectedIndex, setSelectedIndex] = useState(0)
+  const isMobile = useIsMobile()
+
+  const onApiChange = useCallback(
+    (api: EmblaCarouselType | undefined) => setEmblaApi(api),
+    [],
+  )
+
+  useEffect(() => {
+    if (!emblaApi) return
+    const onSelect = () => setSelectedIndex(emblaApi.selectedScrollSnap())
+    onSelect()
+    emblaApi.on('select', onSelect).on('reInit', onSelect)
+    return () => {
+      emblaApi.off('select', onSelect).off('reInit', onSelect)
+    }
+  }, [emblaApi])
 
   if (!data.enabled || data.cases.length === 0) return null
+
+  const hasMultiple = data.cases.length > 1
 
   return (
     <section className="w-full max-w-6xl mx-auto py-12 px-4">
@@ -29,11 +53,15 @@ const ComparisonCarousel = () => {
 
       {/* The Carousel */}
       <EmblaOpacity
-        disabledControls={data.cases.length <= 1}
+        disabledControls={!hasMultiple}
+        onApiChange={onApiChange}
+        hideArrows
         options={{
           loop: true,
-          // Crucial: Disable carousel dragging if the user is sliding the Before/After handle
-          watchDrag: !isDraggingSlider && data.cases.length > 1,
+          // The drag gesture belongs to the before/after handle at every size.
+          // Cases are changed with the arrows below, which sit outside the
+          // image so they never compete with the handle.
+          watchDrag: false,
         }}
       >
         {data.cases.map((caseItem) => (
@@ -81,6 +109,33 @@ const ComparisonCarousel = () => {
           </div>
         ))}
       </EmblaOpacity>
+
+      {/* Navigation, kept clear of the draggable image area. */}
+      {hasMultiple ? (
+        <div className="mt-6 flex items-center justify-center gap-4">
+          <Button
+            variant="outline"
+            size="icon"
+            className="rounded-full"
+            aria-label="Previous case"
+            onClick={() => emblaApi?.scrollPrev()}
+          >
+            <ChevronLeft />
+          </Button>
+          <span className="font-mono text-sm text-muted-foreground tabular-nums">
+            {selectedIndex + 1} / {data.cases.length}
+          </span>
+          <Button
+            variant="outline"
+            size="icon"
+            className="rounded-full"
+            aria-label="Next case"
+            onClick={() => emblaApi?.scrollNext()}
+          >
+            <ChevronRight />
+          </Button>
+        </div>
+      ) : null}
     </section>
   )
 }
