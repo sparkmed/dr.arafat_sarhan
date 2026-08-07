@@ -4,6 +4,7 @@ import { ConvexProvider, ConvexReactClient } from 'convex/react'
 import { routeTree } from './routeTree.gen'
 import './i18n'
 import React from 'react'
+import { ThemeProvider } from '@/components/theme-provider'
 
 const router = createRouter({
   routeTree,
@@ -26,9 +27,11 @@ if (!rootElement.innerHTML) {
   root.render(
     <React.StrictMode>
       <ConvexProvider client={convex}>
-        <React.Suspense fallback="Loading translations...">
-          <RouterProvider router={router} />
-        </React.Suspense>
+        <ThemeProvider defaultTheme="system" storageKey="theme">
+          <React.Suspense fallback="Loading translations...">
+            <RouterProvider router={router} />
+          </React.Suspense>
+        </ThemeProvider>
       </ConvexProvider>
     </React.StrictMode>,
   )
